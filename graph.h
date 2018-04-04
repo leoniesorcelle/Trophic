@@ -239,12 +239,12 @@ class GraphInterface
         // A compl�ter �ventuellement par des widgets de d�coration ou
         // d'�dition (boutons ajouter/enlever ...)
 
-        grman::WidgetBox m_Menu;
+        /*grman::WidgetBox m_Menu;
         grman::WidgetImage m_Menu_image;
         grman::WidgetButton m_Reseau1;
         grman::WidgetButton m_Reseau2;
         grman::WidgetButton m_Reseau3;
-        grman::WidgetButton m_MenuQuitter;
+        grman::WidgetButton m_MenuQuitter;*/
 
         grman::WidgetButton m_boutonAjout;
         grman::WidgetImage m_boutonAjout_image;
@@ -270,13 +270,11 @@ class GraphInterface
         GraphInterface(int x, int y, int w, int h);
         //void update();
 };
-
 class Graph
 {
     private :
         /// La "liste" des ar�tes
         std::map<int, Edge> m_edges; //indice et arrete
-
         /// La liste des sommets
         std::map<int, Vertex> m_vertices;
 
@@ -313,9 +311,40 @@ class Graph
         void rajout1(int idx,int edx);
         void rajout2(int idx,int edx);
         void rajout3(int idx,int edx);
-        //void menu();
         void Supprimer_edge(int edx);
         void supprimer_Sommet(int idx);
 };
+
+
+class Menu
+{
+    friend class Graph;
+    private :
+    /// Les widgets de l'interface. N'oubliez pas qu'il ne suffit pas de d�clarer
+    /// ici un widget pour qu'il apparaisse, il faut aussi le mettre en place et
+    /// le param�trer ( voir l'impl�mentation du constructeur dans le .cpp )
+
+    /// La boite qui contient toute l'interface d'un graphe
+    grman::WidgetBox m_top_box;
+    /// Dans cette boite seront ajout�s les (interfaces des) sommets et des arcs...
+    grman::WidgetBox m_main_box;
+    /// Dans cette boite seront ajout�s des boutons de contr�le etc...
+    grman::WidgetBox m_tool_box;
+    // A compl�ter �ventuellement par des widgets de d�coration ou
+    // d'�dition (boutons ajouter/enlever ...)
+
+    grman::WidgetBox m_Menu;
+    grman::WidgetImage m_Menu_image;
+    grman::WidgetButton m_Reseau1;
+    grman::WidgetButton m_Reseau2;
+    grman::WidgetButton m_Reseau3;
+    grman::WidgetButton m_MenuQuitter;
+
+    public :
+      Menu();
+      void update(Graph g);
+};
+
+
 
 #endif // GRAPH_H_INCLUDED

@@ -11,9 +11,9 @@ int main()
     /// Le nom du r�pertoire o� se trouvent les images � charger
     grman::set_pictures_path("pics");
     /// Un exemple de graphe
+    Menu m;
     Graph g;
-    //g.menu();
-    g.recuperation();
+//    g.recuperation();
     //g.rajout(8,11);
     //g.supprimer_Sommet();
 
@@ -21,10 +21,11 @@ int main()
     /// ( contrairement � des frameworks plus avanc�s )
     while ( !key[KEY_ESC] )
     {
+        m.update(g);
         /// Il faut appeler les m�thodes d'update des objets qui comportent des widgets
-        g.update();
+       // g.update();
         /// Mise � jour g�n�rale (clavier/souris/buffer etc...)
-        g.sauvegarde2();
+        //g.sauvegarde2();
         grman::mettre_a_jour();
     }
 

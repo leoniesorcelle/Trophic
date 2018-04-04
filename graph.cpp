@@ -140,30 +140,7 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
 
-    m_top_box.add_child(m_Menu);
-    m_Menu.set_dim(1000,740);
-    m_Menu.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
-    m_Menu.set_bg_color(BLANC);
-    m_Menu.add_child(m_Menu_image);
-    m_Menu_image.set_pic_name("Menu.jpg");
-
-    m_Menu.add_child(m_Reseau1);
-    m_Reseau1.set_dim(380, 110);
-    m_Reseau1.set_pos(567, 200);
-
-    m_Menu.add_child(m_Reseau2);
-    m_Reseau2.set_dim(380, 110);
-    m_Reseau2.set_pos(567, 342);
-
-    m_Menu.add_child(m_Reseau3);
-    m_Reseau3.set_dim(380, 110);
-    m_Reseau3.set_pos(567, 484);
-
-    m_Menu.add_child(m_MenuQuitter);
-    m_MenuQuitter.set_dim(240, 58);
-    m_MenuQuitter.set_pos(707, 626);
-
-    /*//Barre d'informations et d'outils à gauche avec les boutons
+    //Barre d'informations et d'outils à gauche avec les boutons
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(200,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
@@ -233,7 +210,94 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_algo2_3.set_pos(0,685);
     m_tool_box.add_child(m_algo2_4);
     m_algo2_4.set_message("etudier les changements");
-    m_algo2_4.set_pos(0,695);*/
+    m_algo2_4.set_pos(0,695);
+}
+
+Menu::Menu()
+{
+    m_top_box.set_dim(1000,740);
+    m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+
+    m_top_box.add_child(m_Menu);
+    m_Menu.set_dim(1000,740);
+    m_Menu.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
+    m_Menu.set_bg_color(BLANC);
+    m_Menu.add_child(m_Menu_image);
+    m_Menu_image.set_pic_name("Menu.jpg");
+
+    m_Menu.add_child(m_Reseau1);
+    m_Reseau1.set_dim(380, 110);
+    m_Reseau1.set_pos(567, 200);
+
+    m_Menu.add_child(m_Reseau2);
+    m_Reseau2.set_dim(380, 110);
+    m_Reseau2.set_pos(567, 342);
+
+    m_Menu.add_child(m_Reseau3);
+    m_Reseau3.set_dim(380, 110);
+    m_Reseau3.set_pos(567, 484);
+
+    m_Menu.add_child(m_MenuQuitter);
+    m_MenuQuitter.set_dim(240, 58);
+    m_MenuQuitter.set_pos(707, 626);
+}
+
+void Menu::update(Graph g)
+{
+
+  m_top_box.update();
+
+  if (m_Reseau1.clicked())
+  {   //  grman::buf_effacer_page();
+        std::cout<<"Reseau numero 1" << std::endl;
+  while ( !key[KEY_U] )
+    {
+                g.update();
+                grman::mettre_a_jour();
+    }
+  }
+  /*if (m_Reseau2.clicked())
+  {
+      std::cout<<"Reseau numero 2" << std::endl;
+  }
+  if (m_Reseau3.clicked())
+  {
+      std::cout<<"Reseau numero 3" << std::endl;
+  }
+  if (m_MenuQuitter.clicked())
+  {
+      std::cout<<"Demande de quitter l'interface!" << std::endl;
+  }*/
+
+  /*if (m_boutonAjout.clicked())
+  {
+      std::cout<<"Demande d'ajout de sommet !" << std::endl;
+  }
+
+  if (m_boutonSupp.clicked())
+  {
+      std::cout<<"Demande de suppression de sommet!" << std::endl;
+  }
+
+  if (m_boutonCharger.clicked())
+  {
+      std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+  }
+
+  if (m_boutonSauvegarder.clicked())
+  {
+      std::cout<<"Demande de sauvegarde!" << std::endl;
+  }
+
+  if (m_boutonQuitter.clicked())
+  {
+      std::cout<<"Demande de quitter le reseau!" << std::endl;
+  }
+
+  if (m_boutonAlgoChoix.clicked())
+  {
+      std::cout<<"Demande d'algorithme 2!" << std::endl;
+  }*/
 }
 
 /// M�thode sp�ciale qui construit un graphe arbitraire (d�mo)
@@ -281,7 +345,7 @@ void Graph::update()
 
     m_interface->m_top_box.update();
 
-    if (m_interface->m_Reseau1.clicked())
+    /*if (m_interface->m_Reseau1.clicked())
     {
         std::cout<<"Reseau numero 1" << std::endl;
     }
@@ -296,9 +360,8 @@ void Graph::update()
     if (m_interface->m_MenuQuitter.clicked())
     {
         std::cout<<"Demande de quitter l'interface!" << std::endl;
-    }
+    }*/
 
-    
 
     if (m_interface->m_boutonAjout.clicked())
     {
@@ -389,18 +452,17 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 
 /*void Graph::recuperation1()
 {
-   // ouvrir le fichier
-   m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-
-   // double value;
+    // ouvrir le fichier
+    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    // double value;
     //int m_x,m_y;
     //string nom;
     //double poid;
     //int a,d;
     std::ifstream fichierA("arete1.txt",std::ios::in);
-   std::ifstream fichierS("sommet1.txt",std::ios::in);
-   // verifier l'ouverture
-   if(fichierS)
+    std::ifstream fichierS("sommet1.txt",std::ios::in);
+    // verifier l'ouverture
+    if(fichierS)
    {
        fichierS>>m_ordre;
        for(unsigned int i=0;i< m_ordre;i++)
@@ -408,7 +470,6 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
         fichierS>>i>>m_vertices[i].m_value>>m_vertices[i].m_interface->m_top_box.get_posx()>>m_vertices[i].m_interface->m_top_box.set_posy()>>m_vertices[i].m_nom;
         add_interfaced_vertex(i,m_vertices[i].m_value,m_vertices[i].m_interface->m_top_box.get_posx(),m_vertices[i].m_interface->m_top_box.get_posy(),m_vertices[i].m_nom);
        }
-
    }
 
     if(fichierA)
@@ -419,16 +480,13 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
         fichierA>>i>>m_edges[i].m_from>>m_edges[i].m_to>>m_edges[i].m_weight;
         add_interfaced_edge(i,m_edges[i].m_from,m_edges[i].m_to,m_edges[i].m_weight);
        }
-
    }
 
 else // si il y a une erreur
     cout << " error" << endl;
-
    //fermer le fichier
    fichierS.close();
    fichierA.close();
-
 }
 */
 
@@ -787,91 +845,4 @@ void Graph::supprimer_Sommet(int idx)
     }
 
     m_vertices.erase( idx );
-}
-
-void Graph::menu()
-{
-   //Déclaration des variables pour le menu
-    int couleurPixel;
-    int reglesbool = 0;
-    int niveau = 0;
-
-    //Déclaration des bitmap pour le menu
-    BITMAP* buffer;
-    BITMAP* menu;
-    BITMAP* carteChoix;
-      //Initialisation Allegro
-    allegro_init();
-    install_keyboard();
-    install_mouse();
-    set_color_depth(desktop_color_depth());
-    if(set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1200, 600, 0, 0)!=0)
-        {
-        allegro_message("erreur graphique");
-        allegro_exit();
-        exit(EXIT_FAILURE);
-        }
-    show_mouse(screen); //Fin de l'initialisation Allegro
-    //Chargement et création des bitmaps utiles au menu
-    buffer = create_bitmap(SCREEN_W,SCREEN_H);
-    menu = load_bitmap ("menu.bmp", NULL);
-    carteChoix = load_bitmap ("carteChoix.bmp", NULL);
-
-        //Affichage de la bitmap pour la détection du clic par rapport au choix dans le menu
-    draw_sprite(buffer,carteChoix,0,0);
-
-      //Début de la boucle de jeu
-    while(!key[KEY_ESC])
-    {
-        //Booléen pour détecter le clic de la souris
-        if (reglesbool == 0)
-        {
-            //couleurPixel prend la valeur de la couleur au niveau du clic de la souris
-            couleurPixel = getpixel(carteChoix,mouse_x,mouse_y);
-            //Affichage des différentes bitmaps
-            draw_sprite(buffer,carteChoix,0,0);
-            draw_sprite(buffer,menu,0,0);
-
-            //Quand on clique
-            if (mouse_b & 1)
-            {
-                //Si la couleur détectée est blanche, on appelle le sous programme du jeu du niveau1
-                 if(couleurPixel == NIVEAU1 || niveau == 1)
-                {
-                     cout<<"OK"<<endl;
-                }
-                //Si la couleur détectée est rouge, on appelle le sous programme du jeu du niveau2
-                else if(couleurPixel == NIVEAU2 || niveau == 2)
-                {
-                    cout<<"OK2"<<endl;
-                }
-                //Si la couleur détectée est bleu, on appelle le sous programme du jeu du niveau3
-                else if(couleurPixel == NIVEAU3 || niveau == 3)
-                {
-                    cout<<"OK3"<<endl;
-                }
-                //Si la couleur détectée est verte
-                //Si la couleur détectée est jaune
-                else if(couleurPixel == QUITTER)
-                {
-                    //Quand on appuye sur le quitter, on libére toutes les bitmaps
-                    free(buffer);
-                    free(menu);
-                    free(carteChoix);
-                    allegro_exit();
-                    exit(0);
-                }
-            }
-        }
-
-        //Quand le niveau est différent de 0
-        if (!niveau) {
-            //Affichage du buffer sur le screen
-            blit(buffer,screen,0,0,0,0, SCREEN_W, SCREEN_H);
-        }
-        //On libère le buffer
-        clear_bitmap(buffer);
-    }
-
-    rest(20);
 }
