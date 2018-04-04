@@ -1,0 +1,7 @@
+6
+0 30.0 200 100 Panda.jpg
+1 12.5 400 100 Bambous.jpg
+2 0.0 200 300 Deforestation.jpg
+3 0.0 400 300 Homme2.jpg
+4 1.0 600 300 Photosynthese.jpg
+5 11.0 100 500 Glucides.jpg

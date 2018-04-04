@@ -2,6 +2,8 @@
 #include <iostream>
 #include "graph.h"
 
+using namespace std;
+
 int main()
 {
     /// A appeler en 1er avant d'instancier des objets graphiques etc...
@@ -22,6 +24,7 @@ int main()
         /// Il faut appeler les m�thodes d'update des objets qui comportent des widgets
         g.update();
         /// Mise � jour g�n�rale (clavier/souris/buffer etc...)
+        g.sauvegarde2();
         grman::mettre_a_jour();
     }
 

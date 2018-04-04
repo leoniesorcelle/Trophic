@@ -1,0 +1,13 @@
+12
+0 30.0 200 100 Orque.jpg
+1 60.0 400 100 Phoque_weddell.jpg
+2 50.0 200 300 Leopard_mer.jpg
+3 0.0 400 300 Manchot_empereur.jpg
+4 100.0 600 300 Elephant_mer.jpg
+5 100.0 100 500 Gorfou.jpg
+6 100.0 300 500 Manchot_adelie.jpg
+7 100.0 500 500 Gros_poissons.jpg
+8 100.0 600 500 Petits_poissons.jpg
+9 100.0 600 500 Phytoplancton.jpg
+10 100.0 600 500 Krill.jpg
+11 100.0 600 500 Baleine_bosses.jpg

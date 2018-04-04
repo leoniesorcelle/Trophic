@@ -133,7 +133,7 @@ class Vertex
         std::vector<int> m_out; // plusieurs fleche qui parte
         /// un exemple de donn�e associ�e � l'arc, on peut en ajouter d'autres...
         double m_value; // poid
-
+        std::string m_nom;
         int m_id; // identifiant
         int m_x,m_Y; //coordonnee
         /// le POINTEUR sur l'interface associ�e, nullptr -> pas d'interface
@@ -199,7 +199,8 @@ class Edge
         /// indice du sommet d'arriv�e de l'arc
         int m_to;
         /// un exemple de donn�e associ�e � l'arc, on peut en ajouter d'autres...
-        double m_weight; //poid
+        double m_weight; //poids
+        int m_i; // identifiant
         /// le POINTEUR sur l'interface associ�e, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
@@ -299,13 +300,20 @@ class Graph
         /// Voir impl�mentation dans le .cpp
         /// Cette m�thode est � enlever et remplacer par un syst�me
         /// de chargement de fichiers par exemple.
-        void make_example();
+        //void make_example();
 
         /// La m�thode update � appeler dans la boucle de jeu pour les graphes avec interface
         void update();
-        void recuperation();
-        void rajout(int idx,int edx);
-        void menu();
+        void recuperation1();
+        void recuperation2();
+        void recuperation3();
+        void sauvegarde1();
+        void sauvegarde2();
+        void sauvegarde3();
+        void rajout1(int idx,int edx);
+        void rajout2(int idx,int edx);
+        void rajout3(int idx,int edx);
+        //void menu();
         void Supprimer_edge(int edx);
         void supprimer_Sommet(int idx);
 };
