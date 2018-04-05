@@ -17,7 +17,7 @@
 namespace grman
 {
 
-// Permet de compiler en mode plein ï¿½cran (dï¿½commenter)
+// Permet de compiler en mode plein écran (décommenter)
 #define MODE_GRAPHIQUE GFX_AUTODETECT_WINDOWED
 //#define MODE_GRAPHIQUE GFX_AUTODETECT_FULLSCREEN
 
@@ -159,7 +159,7 @@ void init()
 
     srand(time(NULL));
 
-    /// Gestion des caractï¿½res accentuï¿½s
+    /// Gestion des caractères accentués
     set_uformat(U_ASCII);
 
     allegro_init();
@@ -254,7 +254,7 @@ void rafraichir_clavier_souris()
 }
 
 
-/// Auxiliaires : complï¿½ments aux fonctions graphiques allegro
+/// Auxiliaires : compléments aux fonctions graphiques allegro
 
 void thick_line(BITMAP *bmp, int x1, int y1, int x2, int y2, int thickness, int color)
 {
@@ -272,3 +272,5 @@ void thick_line(BITMAP *bmp, int x1, int y1, int x2, int y2, int thickness, int 
 
 
 } /// FIN DE NAMESPACE GRMAN
+
+

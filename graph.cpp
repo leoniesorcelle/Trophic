@@ -1,5 +1,4 @@
 #include "graph.h"
-#include "grman/grman.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -136,263 +135,23 @@ void Edge::post_update()
 /// �l�ments qui seront ensuite ajout�s lors de la mise ne place du Graphe
 GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
-    //Totalité de l'écran d'affichage
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
 
-    //Barre d'informations et d'outils à gauche avec les boutons
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(200,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
-    //Cadre où on placera les réseaux d'écosystèmes
+
     m_top_box.add_child(m_main_box);
     m_main_box.set_dim(800,720);
     m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
     m_main_box.set_bg_color(BLANCBLEU);
-
-    //Cadre et bouton pour ajouter un sommet
-    m_tool_box.add_child(m_boutonAjout);
-    m_boutonAjout.set_dim(70,50);
-    m_boutonAjout.set_pos(10, 150);
-    //m_boutonAjout.set_bg_color(NOIR);
-    m_boutonAjout.add_child(m_boutonAjout_image);
-    m_boutonAjout_image.set_pic_name("Ajout_sommet.jpg");
-    //Cadre et bouton pour supprimer un ou plusieurs sommets
-    m_tool_box.add_child(m_boutonSupp);
-    m_boutonSupp.set_dim(70,50);
-    m_boutonSupp.set_pos(110,150);
-    //m_boutonSupp.set_bg_color(NOIR);
-    m_boutonSupp.add_child(m_boutonSupp_image);
-    m_boutonSupp_image.set_pic_name("Supp_sommet.jpg");
-    //Cadre et bouton pour charger un nouveau réseau
-    m_tool_box.add_child(m_boutonCharger);
-    m_boutonCharger.set_dim(140,100);
-    m_boutonCharger.set_pos(30,215);
-    m_boutonCharger.set_bg_color(NOIR);
-    m_boutonCharger.add_child(m_boutonCharger_image);
-    m_boutonCharger_image.set_pic_name("Charger.jpg");
-    //Cadre et bouton pour sauvegarder le réseau
-    m_tool_box.add_child(m_boutonSauvegarder);
-    m_boutonSauvegarder.set_dim(140,100);
-    m_boutonSauvegarder.set_pos(30,330);
-    m_boutonSauvegarder.set_bg_color(NOIR);
-    m_boutonSauvegarder.add_child(m_boutonSauvegarder_image);
-    m_boutonSauvegarder_image.set_pic_name("Sauvegarder.jpg");
-    //Cadre et bouton pour quitter le réseau et retourner au menu
-    m_tool_box.add_child(m_boutonQuitter);
-    m_boutonQuitter.set_dim(140,100);
-    m_boutonQuitter.set_pos(30,445);
-    m_boutonQuitter.set_bg_color(NOIR);
-    m_boutonQuitter.add_child(m_boutonQuitter_image);
-    m_boutonQuitter_image.set_pic_name("Quitter.jpg");
-
-    //Affichage des algorithmes
-    m_tool_box.add_child(m_algo);
-    m_algo.set_message("  A L G O R I T H M E :");
-    m_algo.set_pos(0,560);
-    //Cadre et bouton pour calculer k, réseau : robuste ou non
-    m_tool_box.add_child(m_boutonAlgoChoix);
-    m_boutonAlgoChoix.set_dim(180,80);
-    m_boutonAlgoChoix.set_pos(5,570);
-    m_boutonAlgoChoix.set_bg_color(NOIR);
-    m_boutonAlgoChoix.add_child(m_boutonAlgoChoix_image);
-    m_boutonAlgoChoix_image.set_pic_name("Algo_choix.jpg");
-    //Affichage de l'algorithme quantitatif
-    m_tool_box.add_child(m_algo2_1);
-    m_algo2_1.set_message("Modifier les valeurs ");
-    m_algo2_1.set_pos(0,665);
-    m_tool_box.add_child(m_algo2_2);
-    m_algo2_2.set_message("quantitatives a l'aide ");
-    m_algo2_2.set_pos(0,675);
-    m_tool_box.add_child(m_algo2_3);
-    m_algo2_3.set_message("de chaque jauge pour ");
-    m_algo2_3.set_pos(0,685);
-    m_tool_box.add_child(m_algo2_4);
-    m_algo2_4.set_message("etudier les changements");
-    m_algo2_4.set_pos(0,695);
 }
 
-Menu::Menu()
-{
-    m_top_box.set_dim(1000,740);
-    m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
-
-    m_top_box.add_child(m_Menu);
-    m_Menu.set_dim(1000,740);
-    m_Menu.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
-    m_Menu.set_bg_color(BLANC);
-    m_Menu.add_child(m_Menu_image);
-    m_Menu_image.set_pic_name("Menu.jpg");
-
-    m_Menu.add_child(m_Reseau1);
-    m_Reseau1.set_dim(380, 110);
-    m_Reseau1.set_pos(567, 200);
-
-    m_Menu.add_child(m_Reseau2);
-    m_Reseau2.set_dim(380, 110);
-    m_Reseau2.set_pos(567, 342);
-
-    m_Menu.add_child(m_Reseau3);
-    m_Reseau3.set_dim(380, 110);
-    m_Reseau3.set_pos(567, 484);
-
-    m_Menu.add_child(m_MenuQuitter);
-    m_MenuQuitter.set_dim(240, 58);
-    m_MenuQuitter.set_pos(707, 626);
-}
-
-void Menu::update(Graph g)
-{
-
-  m_top_box.update();
-
-  if (m_Reseau1.clicked())
-  {   //  grman::buf_effacer_page();
-        std::cout<<"Reseau numero 1" << std::endl;
-  while ( !key[KEY_U] )
-    {
-                g.update();
-                grman::mettre_a_jour();
-    }
-  }
-  /*if (m_Reseau2.clicked())
-  {
-      std::cout<<"Reseau numero 2" << std::endl;
-  }
-  if (m_Reseau3.clicked())
-  {
-      std::cout<<"Reseau numero 3" << std::endl;
-  }
-  if (m_MenuQuitter.clicked())
-  {
-      std::cout<<"Demande de quitter l'interface!" << std::endl;
-  }*/
-
-  /*if (m_boutonAjout.clicked())
-  {
-      std::cout<<"Demande d'ajout de sommet !" << std::endl;
-  }
-
-  if (m_boutonSupp.clicked())
-  {
-      std::cout<<"Demande de suppression de sommet!" << std::endl;
-  }
-
-  if (m_boutonCharger.clicked())
-  {
-      std::cout<<"Demande de chargement d'un reseau!" << std::endl;
-  }
-
-  if (m_boutonSauvegarder.clicked())
-  {
-      std::cout<<"Demande de sauvegarde!" << std::endl;
-  }
-
-  if (m_boutonQuitter.clicked())
-  {
-      std::cout<<"Demande de quitter le reseau!" << std::endl;
-  }
-
-  if (m_boutonAlgoChoix.clicked())
-  {
-      std::cout<<"Demande d'algorithme 2!" << std::endl;
-  }*/
-}
-
-/// M�thode sp�ciale qui construit un graphe arbitraire (d�mo)
-/// Cette m�thode est � enlever et remplacer par un syst�me
-/// de chargement de fichiers par exemple.
-/// Bien s�r on ne veut pas que vos graphes soient construits
-/// "� la main" dans le code comme �a.
-/*void Graph::make_example()
-{
-    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-    // La ligne pr�c�dente est en gros �quivalente � :
-    // m_interface = new GraphInterface(50, 0, 750, 600);
-
-    /// Les sommets doivent �tre d�finis avant les arcs
-    // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 30.0, 200, 100, "Homme.jpg");
-    add_interfaced_vertex(1, 60.0, 400, 100, "Loup.jpg");
-    add_interfaced_vertex(2,  50.0, 200, 300, "Lapin.jpg");
-    add_interfaced_vertex(3,  0.0, 400, 300, "Decomposeurs.jpg");
-    add_interfaced_vertex(4,  100.0, 600, 300, "Sels_mineraux.jpg");
-    add_interfaced_vertex(5,  100.0, 100, 500, "Vegetation.jpg");
-    add_interfaced_vertex(6,  100.0, 300, 500, "Soleil_pluie.jpg");
-    add_interfaced_vertex(7,  100.0, 500, 500, "Campagnols.jpg");
-    add_interfaced_vertex(8,  100.0, 600, 500, "Buse.jpg");
-
-    /// Les arcs doivent �tre d�finis entre des sommets qui existent !
-    // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
-    add_interfaced_edge(0, 1, 0, 300.0);
-    add_interfaced_edge(1, 2, 1, 2.0);
-    add_interfaced_edge(2, 2, 3, 1.0);
-    add_interfaced_edge(3, 3, 4, 0.0);
-    add_interfaced_edge(4, 4, 5, 8.0);
-    add_interfaced_edge(5, 6, 5, 8.0);
-    add_interfaced_edge(6, 7, 5, 50.0);
-    add_interfaced_edge(7, 7, 8, 20.0);
-    add_interfaced_edge(8, 1, 3, 0.0);
-    add_interfaced_edge(9, 7, 1, 0.0);
-    add_interfaced_edge(10, 2, 5, 80.0);
-}
-*/
 /// La m�thode update � appeler dans la boucle de jeu pour les graphes avec interface
 void Graph::update()
 {
-    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-
-    m_interface->m_top_box.update();
-
-    /*if (m_interface->m_Reseau1.clicked())
-    {
-        std::cout<<"Reseau numero 1" << std::endl;
-    }
-    if (m_interface->m_Reseau2.clicked())
-    {
-        std::cout<<"Reseau numero 2" << std::endl;
-    }
-    if (m_interface->m_Reseau3.clicked())
-    {
-        std::cout<<"Reseau numero 3" << std::endl;
-    }
-    if (m_interface->m_MenuQuitter.clicked())
-    {
-        std::cout<<"Demande de quitter l'interface!" << std::endl;
-    }*/
-
-
-    if (m_interface->m_boutonAjout.clicked())
-    {
-        std::cout<<"Demande d'ajout de sommet !" << std::endl;
-    }
-
-    if (m_interface->m_boutonSupp.clicked())
-    {
-        std::cout<<"Demande de suppression de sommet!" << std::endl;
-    }
-
-    if (m_interface->m_boutonCharger.clicked())
-    {
-        std::cout<<"Demande de chargement d'un reseau!" << std::endl;
-    }
-
-    if (m_interface->m_boutonSauvegarder.clicked())
-    {
-        std::cout<<"Demande de sauvegarde!" << std::endl;
-    }
-
-    if (m_interface->m_boutonQuitter.clicked())
-    {
-        std::cout<<"Demande de quitter le reseau!" << std::endl;
-    }
-
-    if (m_interface->m_boutonAlgoChoix.clicked())
-    {
-        std::cout<<"Demande d'algorithme 2!" << std::endl;
-    }
-
     if (!m_interface)
         return;
 
@@ -450,121 +209,61 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_vertices[id_vert2].m_in.push_back(idx);
 }
 
-/*void Graph::recuperation1()
+void Graph::recuperation1()
 {
-    // ouvrir le fichier
-    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-    // double value;
-    //int m_x,m_y;
-    //string nom;
-    //double poid;
-    //int a,d;
-    std::ifstream fichierA("arete1.txt",std::ios::in);
-    std::ifstream fichierS("sommet1.txt",std::ios::in);
-    // verifier l'ouverture
-    if(fichierS)
+   // ouvrir le fichier
+   m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
+    double value; //poid du sommet
+    int m_x,m_y;//coordonnées du sommet
+    string nom;//nom du sommet
+    double poid;// poid de l'arete
+    int ar,de; // numero de sommet d'arrive et de part
+    std::ifstream fichierA("fiche1.txt",std::ios::in);
+   int nbsommet;
+   int nbaretes;
+   // verifier l'ouverture
+   if(fichierA)
    {
-       fichierS>>m_ordre;
-       for(unsigned int i=0;i< m_ordre;i++)
+        fichierA>>nbsommet;
+        m_ordre=nbsommet;
+        fichierA>>nbaretes;
+        m_arete=nbaretes;
+       for(int i=0;i<nbsommet;i++)
        {
-        fichierS>>i>>m_vertices[i].m_value>>m_vertices[i].m_interface->m_top_box.get_posx()>>m_vertices[i].m_interface->m_top_box.set_posy()>>m_vertices[i].m_nom;
-        add_interfaced_vertex(i,m_vertices[i].m_value,m_vertices[i].m_interface->m_top_box.get_posx(),m_vertices[i].m_interface->m_top_box.get_posy(),m_vertices[i].m_nom);
+        fichierA>>i>>value>>m_x>>m_y>>nom;
+        add_interfaced_vertex(i,value,m_x,m_y,nom);
        }
+       for(int i=0;i<nbaretes;i++)
+       {
+        fichierA>>i>>de>>ar>>poid;
+        add_interfaced_edge(i,de,ar,poid);
+       }
+cout <<value<<" "<<poid;
    }
 
-    if(fichierA)
-   {
-       fichierA>>m_arete;
-       for(unsigned int i=0;i< m_arete;i++)
-       {
-        fichierA>>i>>m_edges[i].m_from>>m_edges[i].m_to>>m_edges[i].m_weight;
-        add_interfaced_edge(i,m_edges[i].m_from,m_edges[i].m_to,m_edges[i].m_weight);
-       }
-   }
 
 else // si il y a une erreur
-    cout << " error" << endl;
+    cout << " error recuperation" << endl;
+
    //fermer le fichier
-   fichierS.close();
    fichierA.close();
+
 }
-*/
 
 void Graph::recuperation2()
 {
    // ouvrir le fichier
    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    double value;
-    int m_x,m_y;
-    string nom;
-    double poid;
-    int ar,de;
-    std::ifstream fichierA("arete1.txt",std::ios::in);
-   std::ifstream fichierS("sommet1.txt",std::ios::in);
+    double value; //poid du sommet
+    int m_x,m_y;//coordonnées du sommet
+    string nom;//nom du sommet
+    double poid;// poid de l'arete
+    int ar,de; // numero de sommet d'arrive et de part
+    std::ifstream fichierA("fiche2.txt",std::ios::in);
    int nbsommet;
    int nbaretes;
-   Edge a;
-   Vertex s;
-   // verifier l'ouverture
-   if(fichierS)
-   {
-       fichierS>>nbsommet;
-       m_ordre=nbsommet;
-       for(unsigned int i=0;i< nbsommet;i++)
-       {
-        fichierS>>i>>value>>m_x>>m_y>>nom;
-        s.m_id=i;
-        s.m_value=value;
-        s.m_x=m_x;
-        s.m_Y=m_y;
-        s.m_nom=nom;
-
-        add_interfaced_vertex(i,value,m_x,m_y,nom);
-       }
-
-   }
-
-    if(fichierA)
-   {
-       fichierA>>nbaretes;
-       m_arete=nbaretes;
-       for(unsigned int i=0;i< nbaretes;i++)
-       {
-        fichierA>>i>>de>>ar>>value;
-        a.m_i=i;
-        a.m_weight=value;
-        a.m_from=de;
-        a.m_to=ar;
-        add_interfaced_edge(i,de,ar,value);
-       }
-
-   }
-
-else // si il y a une erreur
-    cout << " error" << endl;
-
-   //fermer le fichier
-   fichierS.close();
-   fichierA.close();
-
-}
-
-void Graph::recuperation3()
-{
-   // ouvrir le fichier
-   m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
-
-    double value;
-    int m_x,m_y;
-    string nom;
-    double poid;
-    int ar,de;
-    std::ifstream fichierA("arete1.txt",std::ios::in);
-   int nbsommet;
-   int nbaretes;
-   Edge a;
-   Vertex s;
    // verifier l'ouverture
    if(fichierA)
    {
@@ -575,28 +274,58 @@ void Graph::recuperation3()
        for(unsigned int i=0;i< nbsommet;i++)
        {
         fichierA>>i>>value>>m_x>>m_y>>nom;
-        s.m_id=i;
-        s.m_value=value;
-        s.m_x=m_x;
-        s.m_Y=m_y;
-        s.m_nom=nom;
         add_interfaced_vertex(i,value,m_x,m_y,nom);
        }
        for(unsigned int i=0;i< nbaretes;i++)
        {
-        fichierA>>i>>de>>ar>>value;
-        a.m_i=i;
-        a.m_weight=value;
-        a.m_from=de;
-        a.m_to=ar;
-        add_interfaced_edge(i,de,ar,value);
+        fichierA>>i>>de>>ar>>poid;
+        add_interfaced_edge(i,de,ar,poid);
        }
-
+cout <<value<<" "<<poid;
    }
 
 
 else // si il y a une erreur
-    cout << " error" << endl;
+    cout << " error recuperation" << endl;
+
+   //fermer le fichier
+   fichierA.close();
+
+}
+
+void Graph::recuperation3()
+{
+   // ouvrir le fichier
+   m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+
+    double value; //poid du sommet
+    int m_x,m_y;//coordonnées du sommet
+    string nom;//nom du sommet
+    double poid;// poid de l'arete
+    int ar,de; // numero de sommet d'arrive et de part
+    std::ifstream fichierA("fiche3.txt",std::ios::in);
+   int nbsommet;
+   int nbaretes;
+   // verifier l'ouverture
+   if(fichierA)
+   {
+       fichierA>>nbsommet;
+       m_ordre=nbsommet;
+        fichierA>>nbaretes;
+       m_arete=nbaretes;
+       for(unsigned int i=0;i< nbsommet;i++)
+       {
+        fichierA>>i>>value>>m_x>>m_y>>nom;
+        add_interfaced_vertex(i,value,m_x,m_y,nom);
+       }
+       for(unsigned int i=0;i< nbaretes;i++)
+       {
+        fichierA>>i>>de>>ar>>poid;
+        add_interfaced_edge(i,de,ar,poid);
+       }
+   }
+else // si il y a une erreur
+    cout << " error recuperation" << endl;
 
    //fermer le fichier
    fichierA.close();
@@ -608,24 +337,23 @@ void Graph::sauvegarde1()
    // ouvrir le fichier
    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    ofstream fichierS("sommet1.txt", ios::out | ios::ate);
-    ofstream fichierA("arete1.txt", ios::out | ios::ate);
+    ofstream fichierA("fiche1.txt", ios::out | ios::ate);
    // verifier l'ouverture
-   if(fichierS)
-{
-       fichierS<<m_ordre<<endl;
-       for(int i=0;i<m_ordre;i++)
-       {
-        fichierS<<i<<" "<<m_vertices[i].m_value<<" "<<m_vertices[i].m_interface->m_top_box.get_posx()<<" "<<m_vertices[i].m_interface->m_top_box.get_posy()<<" "<<m_vertices[i].m_nom<<endl;
-       }
-   }
-
     if(fichierA)
    {
-       fichierA<<m_arete<<endl;
-       for(int i=0;i< m_arete;i++)
+
+        fichierA<<m_vertices.size()<<endl;
+        fichierA<<m_edges.size()<<endl;
+         for(int i=0;i<m_vertices.size();i++)
+       { m_vertices[i].m_interface->m_top_box.set_posx(m_vertices[i].m_interface->m_top_box.get_posx()+2);
+        m_vertices[i].m_interface->m_top_box.set_posy(m_vertices[i].m_interface->m_top_box.get_posy()+2);
+        fichierA<<i<<" "<<m_vertices[i].m_value<<" "<<m_vertices[i].m_interface->m_top_box.get_posx()<<" "<<m_vertices[i].m_interface->m_top_box.get_posy()<<" "<<m_vertices[i].m_interface->m_img.get_pic_name()<<endl;
+       }
+
+
+       for(int i=0;i<m_edges.size();i++)
        {
-        fichierS<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
+        fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
        }
 
    }
@@ -634,7 +362,6 @@ else // si il y a une erreur
     cout << " error" << endl;
 
    //fermer le fichier
-   fichierS.close();
    fichierA.close();
 
 }
@@ -644,20 +371,21 @@ void Graph::sauvegarde2()
    // ouvrir le fichier
    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    ofstream fichierA("arete1.txt", ios::out | ios::ate);
+    ofstream fichierA("fiche2.txt", ios::out | ios::ate);
    // verifier l'ouverture
     if(fichierA)
    {
 
-        fichierA<<m_ordre<<endl;
-        fichierA<<m_arete<<endl;
-         for(int i=0;i<m_ordre;i++)
-       {
-        fichierA<<i<<" "<<m_vertices[i].m_value<<" "<<m_vertices[i].m_interface->m_top_box.get_posx()<<" "<<m_vertices[i].m_interface->m_top_box.get_posy()<<" "<<m_vertices[i].m_nom<<endl;
+        fichierA<<m_vertices.size()<<endl;
+        fichierA<<m_edges.size()<<endl;
+         for(int i=0;i<m_vertices.size();i++)
+       { m_vertices[i].m_interface->m_top_box.set_posx(m_vertices[i].m_interface->m_top_box.get_posx()+2);
+        m_vertices[i].m_interface->m_top_box.set_posy(m_vertices[i].m_interface->m_top_box.get_posy()+2);
+        fichierA<<i<<" "<<m_vertices[i].m_value<<" "<<m_vertices[i].m_interface->m_top_box.get_posx()<<" "<<m_vertices[i].m_interface->m_top_box.get_posy()<<" "<<m_vertices[i].m_interface->m_img.get_pic_name()<<endl;
        }
 
 
-       for(int i=0;i< m_arete;i++)
+       for(int i=0;i<m_edges.size();i++)
        {
         fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
        }
@@ -677,36 +405,23 @@ void Graph::sauvegarde3()
    // ouvrir le fichier
    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    double value;
-    int m_x,m_y;
-    string nom;
-    double poid;
-    int a,d;
-    ofstream fichierS("sommet3.txt", ios::out | ios::trunc);
-    ofstream fichierA("arete3.txt", ios::out | ios::trunc);
-   int nbsommet;
-   int nbaretes;
+    ofstream fichierA("fiche3.txt", ios::out | ios::ate);
    // verifier l'ouverture
-   if(fichierS)
-   {
-       fichierS <<nbsommet<<endl;
-       for(unsigned int i=0;i< nbsommet;i++)
-       {
-        add_interfaced_vertex(i,value,m_x,m_y,nom);
-        fichierS << i<<value<<m_x<<m_y<<nom<<endl;
-
-       }
-
-   }
-
     if(fichierA)
    {
-       fichierA<<nbaretes<<endl;
-       for(unsigned int i=0;i< nbaretes;i++)
-       {
-        add_interfaced_edge(i,d,a,value);
-        fichierA<<i<<d<<a<<value<<endl;
 
+        fichierA<<m_vertices.size()<<endl;
+        fichierA<<m_edges.size()<<endl;
+         for(int i=0;i<m_vertices.size();i++)
+       { m_vertices[i].m_interface->m_top_box.set_posx(m_vertices[i].m_interface->m_top_box.get_posx()+2);
+        m_vertices[i].m_interface->m_top_box.set_posy(m_vertices[i].m_interface->m_top_box.get_posy()+2);
+        fichierA<<i<<" "<<m_vertices[i].m_value<<" "<<m_vertices[i].m_interface->m_top_box.get_posx()<<" "<<m_vertices[i].m_interface->m_top_box.get_posy()<<" "<<m_vertices[i].m_interface->m_img.get_pic_name()<<endl;
+       }
+
+
+       for(int i=0;i<m_edges.size();i++)
+       {
+        fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
        }
 
    }
@@ -715,83 +430,123 @@ else // si il y a une erreur
     cout << " error" << endl;
 
    //fermer le fichier
-   fichierS.close();
    fichierA.close();
 
 }
 
-void Graph::rajout1(int idx,int edx) // idx numero sommet , edx numero aretes
+void Graph::rajout1() // idx numero sommet , edx numero aretes
 {
-string raj;
-cout<<"Vous pouvez rajouter soit insectes ou serpents"<<endl;
-cout<<"Tapez le nom du sommet à rajouter"<<endl;
-cin>>raj;
+ std::ifstream fichier("fiche1.txt",::ios::in);
+   // verifier l'ouverture
+   int nbsommet;
+   int nbaretes;
+
+    if(fichier)
+ {
+        fichier>>nbsommet;
+        int idx=nbsommet-1;
+        fichier>>nbaretes;
+        int edx=nbaretes-1;
+
+
+        string raj;
+        cout<<"Vous pouvez rajouter soit insectes ou serpents"<<endl;
+        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cin>>raj;
     if(raj=="insectes")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,50.0,200,100,"Insectes.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,50.0,200,100,"Insectes.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else if(raj=="serpents")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,20.0,200,100,"Serpents.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,20.0,200,100,"Serpents.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else
     {
     cout<<"nom incorrect"<<endl;
     }
+ }
 }
 
-void Graph::rajout2(int idx,int edx) // idx numero sommet , edx numero aretes
+void Graph::rajout2() // idx numero sommet , edx numero aretes
 {
-string raj;
-cout<<"Vous pouvez rajouter soit bebe ou sportifs"<<endl;
-cout<<"Tapez le nom du sommet à rajouter"<<endl;
-cin>>raj;
+    std::ifstream fichier("fiche2.txt",::ios::in);
+   // verifier l'ouverture
+   int nbsommet;
+   int nbaretes;
+
+    if(fichier)
+ {
+        fichier>>nbsommet;
+        int idx=nbsommet-1;
+        fichier>>nbaretes;
+        int edx=nbaretes-1;
+
+
+        string raj;
+        cout<<"Vous pouvez rajouter soit bebe ou sportifs"<<endl;
+        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cin>>raj;
     if(raj=="bebe")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,50.0,200,100,"Bebe.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,50.0,200,100,"Bebe.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else if(raj=="sportifs")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,20.0,200,100,"Sportifs.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,20.0,200,100,"Sportifs.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else
     {
     cout<<"nom incorrect"<<endl;
     }
+   }
 }
 
-void Graph::rajout3(int idx,int edx) // idx numero sommet , edx numero aretes
+void Graph::rajout3() // idx numero sommet , edx numero aretes
 {
-string raj;
-cout<<"Vous pouvez rajouter soit Homme ou pieuvres"<<endl;
-cout<<"Tapez le nom du sommet à rajouter"<<endl;
-cin>>raj;
+    std::ifstream fichier("fiche3.txt",::ios::in);
+   // verifier l'ouverture
+   int nbsommet;
+   int nbaretes;
+
+    if(fichier)
+ {
+        fichier>>nbsommet;
+        int idx=nbsommet-1;
+        fichier>>nbaretes;
+        int edx=nbaretes-1;
+
+
+        string raj;
+        cout<<"Vous pouvez rajouter soit Homme ou pieuvres"<<endl;
+        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cin>>raj;
     if(raj=="Homme")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,50.0,200,100,"Homme3.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,50.0,200,100,"Homme3.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else if(raj=="pieuvres")
-    {int iidx=idx+1;
-    edx=edx+1;
-    add_interfaced_vertex(iidx,20.0,200,100,"Pieuvres.jpg");
-    add_interfaced_edge(edx,idx,iidx,40.0);
+    {   int iidx=idx+1;
+        edx=edx+1;
+        add_interfaced_vertex(iidx,20.0,200,100,"Pieuvres.jpg");
+        add_interfaced_edge(edx,idx,iidx,40.0);
     }
     else
     {
     cout<<"nom incorrect"<<endl;
     }
+ }
 }
-
 /// edx index of edge to remove
 void Graph::Supprimer_edge(int edx)
 {
@@ -818,7 +573,6 @@ void Graph::Supprimer_edge(int edx)
 
 
 }
-
 void Graph::supprimer_Sommet(int idx)
 {
         /// référence vers le Edge à enlever
