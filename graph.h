@@ -75,6 +75,9 @@
 #include <map>
 #include <string>
 #include <memory>
+
+#include <iostream>
+#include <stack>
 #include "grman/grman.h"
 
 /***************************************************
@@ -113,7 +116,6 @@ class VertexInterface
         VertexInterface(int idx, int x, int y, std::string pic_name="", int pic_idx=0);
 };
 
-
 class Vertex
 {
     // Les (methodes des) classes amies pourront acc�der
@@ -129,17 +131,18 @@ class Vertex
         /// liste des indices des arcs partant du sommet : acc�s aux successeurs
         std::vector<int> m_out; // plusieurs fleche qui parte
         /// un exemple de donn�e associ�e � l'arc, on peut en ajouter d'autres...
-        double m_value; // poid
+        double m_value; // poids
+        //std::string m_nom;
 
         int m_id; // identifiant
-        int m_x,m_Y; //coordonnee
+        int m_x,m_Y; //coordonnées
         /// le POINTEUR sur l'interface associ�e, nullptr -> pas d'interface
         std::shared_ptr<VertexInterface> m_interface = nullptr;
         // Docu shared_ptr : https://msdn.microsoft.com/fr-fr/library/hh279669.aspx
         // La ligne pr�c�dente est en gros �quivalent � la ligne suivante :
         // VertexInterface * m_interface = nullptr;
 
-    public:
+    public :
         /// Les constructeurs sont � compl�ter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Vertex (double _value=0,VertexInterface *interface=nullptr) :
@@ -193,18 +196,15 @@ class Edge
     private :
         /// indice du sommet de d�part de l'arc
         int m_from;
-
         /// indice du sommet d'arriv�e de l'arc
         int m_to;
-
         /// un exemple de donn�e associ�e � l'arc, on peut en ajouter d'autres...
-        double m_weight; //poid
-
+        double m_weight; //poids
+        int m_i; // identifiant
         /// le POINTEUR sur l'interface associ�e, nullptr -> pas d'interface
         std::shared_ptr<EdgeInterface> m_interface = nullptr;
 
-    public:
-
+    public :
         /// Les constructeurs sont � compl�ter selon vos besoin...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Edge (double weight=0, EdgeInterface *interface=nullptr) :
@@ -238,30 +238,49 @@ class GraphInterface
         // A compl�ter �ventuellement par des widgets de d�coration ou
         // d'�dition (boutons ajouter/enlever ...)
 
+        grman::WidgetButton m_boutonAjout;
+        grman::WidgetImage m_boutonAjout_image;
+        grman::WidgetButton m_boutonSupp;
+        grman::WidgetImage m_boutonSupp_image;
+        grman::WidgetButton m_boutonCharger;
+        grman::WidgetImage m_boutonCharger_image;
+        grman::WidgetButton m_boutonSauvegarder;
+        grman::WidgetImage m_boutonSauvegarder_image;
+        grman::WidgetButton m_boutonQuitter;
+        grman::WidgetImage m_boutonQuitter_image;
+        grman::WidgetButton m_boutonAlgoChoix;
+        grman::WidgetImage m_boutonAlgoChoix_image;
+        grman::WidgetText m_algo;
+        grman::WidgetText m_algo2_1;
+        grman::WidgetText m_algo2_2;
+        grman::WidgetText m_algo2_3;
+        grman::WidgetText m_algo2_4;
+
     public :
         // Le constructeur met en place les �l�ments de l'interface
         // voir l'impl�mentation dans le .cpp
         GraphInterface(int x, int y, int w, int h);
+        //void update();
 };
 
 class Graph
 {
+    friend class Menu;
+
     private :
         /// La "liste" des ar�tes
         std::map<int, Edge> m_edges; //indice et arrete
-
         /// La liste des sommets
         std::map<int, Vertex> m_vertices;
 
         int m_ordre;
-
         int m_arete;
 
         /// le POINTEUR sur l'interface associ�e, nullptr -> pas d'interface
         std::shared_ptr<GraphInterface> m_interface = nullptr;
 
-    public:
-        /// Les constructeurs sont � compl�ter selon vos besoin...
+    public :
+        /// Les constructeurs sont � compl�ter selon vos besoins...
         /// Ici on ne donne qu'un seul constructeur qui peut utiliser une interface
         Graph (GraphInterface *interface=nullptr) :
             m_interface(interface)  {  }
@@ -273,7 +292,7 @@ class Graph
         /// Voir impl�mentation dans le .cpp
         /// Cette m�thode est � enlever et remplacer par un syst�me
         /// de chargement de fichiers par exemple.
-        void make_example();
+        //void make_example();
 
         /// La m�thode update � appeler dans la boucle de jeu pour les graphes avec interface
         void update();
@@ -286,8 +305,41 @@ class Graph
         void rajout1();
         void rajout2();
         void rajout3();
-        void Supprimer_edge(int edx);
+        void supprimer_edge(int edx);
         void supprimer_Sommet(int idx);
+};
+
+class Menu
+{
+    friend class Graph;
+
+    private :
+    /// Les widgets de l'interface. N'oubliez pas qu'il ne suffit pas de d�clarer
+    /// ici un widget pour qu'il apparaisse, il faut aussi le mettre en place et
+    /// le param�trer ( voir l'impl�mentation du constructeur dans le .cpp )
+
+    /// La boite qui contient toute l'interface d'un graphe
+    grman::WidgetBox m_top_box;
+    /// Dans cette boite seront ajout�s les (interfaces des) sommets et des arcs...
+    grman::WidgetBox m_main_box;
+    /// Dans cette boite seront ajout�s des boutons de contr�le etc...
+    grman::WidgetBox m_tool_box;
+    // A compl�ter �ventuellement par des widgets de d�coration ou
+    // d'�dition (boutons ajouter/enlever ...)
+
+    grman::WidgetBox m_Menu;
+    grman::WidgetImage m_Menu_image;
+    grman::WidgetButton m_Reseau1;
+    grman::WidgetButton m_Reseau2;
+    grman::WidgetButton m_Reseau3;
+    grman::WidgetButton m_MenuQuitter;
+
+    std::shared_ptr<GraphInterface> m_interface = nullptr;
+    // std::shared_ptr<Graph> m_recuperation = nullptr;
+
+    public :
+      Menu();
+      void update(Graph g);
 };
 
 #endif // GRAPH_H_INCLUDED

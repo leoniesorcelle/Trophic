@@ -58,3 +58,65 @@
 	<iostream>
 	"graph.h"
 
+1523037593 source:c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\grman.cpp
+	<cmath>
+	<unordered_map>
+	<unordered_set>
+	<utility>
+	<string>
+	<iostream>
+	<regex>
+	"grman.h"
+	<allegro.h>
+	<png.h>
+	<loadpng.h>
+	<jpgalleg.h>
+
+1523037593 c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\grman.h
+	<allegro.h>
+	<string>
+	"grman_couleurs.h"
+	"coords.h"
+	"widget.h"
+
+1523037593 c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\grman_couleurs.h
+
+1523037593 c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\coords.h
+	<cmath>
+
+1523037593 c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\widget.h
+	"grman.h"
+	<iostream>
+	<string>
+	<vector>
+	<algorithm>
+	<allegro.h>
+
+1523039368 source:c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\main.cpp
+	"grman/grman.h"
+	<iostream>
+	"graph.h"
+
+1523040580 c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\graph.h
+	<vector>
+	<map>
+	<string>
+	<memory>
+	<iostream>
+	<stack>
+	"grman/grman.h"
+
+1523042538 source:c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\graph.cpp
+	"graph.h"
+	"grman/grman.h"
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1523037593 source:c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\coords.cpp
+	"coords.h"
+
+1523037593 source:c:\users\leonie sorcelle\desktop\projet piscine\okay\graph_lib_exemple_graph\grman\widget.cpp
+	"widget.h"
+
