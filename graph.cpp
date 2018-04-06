@@ -5,37 +5,30 @@
 #include <sstream>
 #include <string>
 
-#define NIVEAU1 makecol(0,0,0)
-#define NIVEAU2 makecol(255,0,0)
-#define NIVEAU3 makecol(0,0,255)
-#define REGLE_DU_JEU makecol(0,255,0)
-#define QUITTER makecol(255,255,0)
-
 using namespace std;
 
 /***************************************************
                     VERTEX
 ****************************************************/
-
-/// Le constructeur met en place les �l�ments de l'interface
+//Le constructeur met en place les éléments de l'interface
 VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, int pic_idx)
 {
-    // La boite englobante
+    //On affiche la totalité de l'écran dans une top box
     m_top_box.set_pos(x, y);
     m_top_box.set_dim(130, 100);
     m_top_box.set_moveable();
 
-    // Le slider de r�glage de valeur
+    //On affiche le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0); // Valeurs arbitraires, � adapter...
+    m_slider_value.set_range(0.0 , 100.0);
     m_slider_value.set_dim(20,80);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
-    // Label de visualisation de valeur
+    //On affiche le label de visualisation de valeur : valeur du slider
     m_top_box.add_child( m_label_value );
     m_label_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Down);
 
-    // Une illustration...
+    //On affiche une illustration
     if (pic_name!="")
     {
         m_top_box.add_child( m_img );
@@ -44,7 +37,7 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
         m_img.set_gravity_x(grman::GravityX::Right);
     }
 
-    // Label de visualisation d'index du sommet dans une boite
+    //On affiche le label de visualisation d'index du sommet dans une boite pour savoir comment est situé le sommet par rapport aux autres
     m_top_box.add_child( m_box_label_idx );
     m_box_label_idx.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Down);
     m_box_label_idx.set_dim(20,12);
@@ -54,34 +47,33 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
     m_label_idx.set_message( std::to_string(idx) );
 }
 
-/// Gestion du Vertex avant l'appel � l'interface
+//Gestion du Vertex avant l'appel à l'interface
 void Vertex::pre_update()
 {
     if (!m_interface)
         return;
-    /// Copier la valeur locale de la donn�e m_value vers le slider associ�
+    //Copier la valeur locale de la donnée m_value vers le slider associé
     m_interface->m_slider_value.set_value(m_value);
-    /// Copier la valeur locale de la donn�e m_value vers le label sous le slider
+    //Copier la valeur locale de la donnée m_value vers le label sous le slider
     m_interface->m_label_value.set_message( std::to_string( (int)m_value) );
 }
 
-/// Gestion du Vertex apr�s l'appel � l'interface
+//Gestion du Vertex après l'appel à l'interface
 void Vertex::post_update()
 {
     if (!m_interface)
         return;
-    /// Reprendre la valeur du slider dans la donn�e m_value locale
+    //Reprendre la valeur du slider dans la donnée m_value locale
     m_value = m_interface->m_slider_value.get_value();
 }
 
 /***************************************************
                     EDGE
 ****************************************************/
-
-/// Le constructeur met en place les �l�ments de l'interface
+//Le constructeur met en place les éléments de l'interface
 EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
 {
-    // Le WidgetEdge de l'interface de l'arc
+    //Le WidgetEdge de l'interface de l'arc
     if ( !(from.m_interface && to.m_interface) )
     {
         std::cerr << "Error creating EdgeInterface between vertices having no interface" << std::endl;
@@ -91,58 +83,63 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
     m_top_edge.attach_to(to.m_interface->m_top_box);
     m_top_edge.reset_arrow_with_bullet();
 
-    // Une boite pour englober les widgets de r�glage associ�s
+    //Une boite pour englober les widgets de réglage associés
     m_top_edge.add_child(m_box_edge);
     m_box_edge.set_dim(24,60);
     m_box_edge.set_bg_color(BLANCBLEU);
 
-    // Le slider de r�glage de valeur
+    //Le slider de réglage de valeur
     m_box_edge.add_child( m_slider_weight );
-    m_slider_weight.set_range(0.0 , 100.0); // Valeurs arbitraires, � adapter...
+    m_slider_weight.set_range(0.0 , 100.0);
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
 
-    // Label de visualisation de valeur
+    //Label de visualisation de valeur
     m_box_edge.add_child( m_label_weight );
     m_label_weight.set_gravity_y(grman::GravityY::Down);
 }
 
-/// Gestion du Edge avant l'appel � l'interface
+//Gestion du Edge avant l'appel à l'interface
 void Edge::pre_update()
 {
     if (!m_interface)
         return;
-    /// Copier la valeur locale de la donn�e m_weight vers le slider associ�
+    //Copier la valeur locale de la donnée m_weight vers le slider associé
     m_interface->m_slider_weight.set_value(m_weight);
-    /// Copier la valeur locale de la donn�e m_weight vers le label sous le slider
+    //Copier la valeur locale de la donnée m_weight vers le label sous le slider
     m_interface->m_label_weight.set_message( std::to_string( (int)m_weight ) );
 }
 
-/// Gestion du Edge apr�s l'appel � l'interface
+//Gestion du Edge après l'appel à l'interface
 void Edge::post_update()
 {
     if (!m_interface)
         return;
-    /// Reprendre la valeur du slider dans la donn�e m_weight locale
+    //Reprendre la valeur du slider dans la donnée m_weight locale
     m_weight = m_interface->m_slider_weight.get_value();
 }
 
 /***************************************************
                     GRAPH
 ****************************************************/
-
-/// Ici le constructeur se contente de pr�parer un cadre d'accueil des
-/// �l�ments qui seront ensuite ajout�s lors de la mise ne place du Graphe
+//Ce constructeur se contente de préparer un cadre d'accueil des éléments qui seront ensuite ajoutés lors de la mise ne place du Graphe
 GraphInterface::GraphInterface(int x, int y, int w, int h)
 {
+    //La top box prend les dimensions de l'écran où on va tout afficher
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
-
+    //On affiche la tool box sur la top box sur la gauche de l'écran pour ensuite afficher la barre d'outils dessus
     m_top_box.add_child(m_tool_box);
     m_tool_box.set_dim(200,720);
     m_tool_box.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_tool_box.set_bg_color(BLANCBLEU);
+    //On affiche la main box sur la top box sur la droite de l'écran
+    m_top_box.add_child(m_main_box);
+    m_main_box.set_dim(800,720);
+    m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
+    m_main_box.set_bg_color(BLANCBLEU);
 
+    //Déclaration des différents boutons sur la barre d'outils
     //Cadre et bouton pour ajouter un sommet
     m_tool_box.add_child(m_boutonAjout);
     m_boutonAjout.set_dim(70,50);
@@ -203,26 +200,25 @@ GraphInterface::GraphInterface(int x, int y, int w, int h)
     m_tool_box.add_child(m_algo2_4);
     m_algo2_4.set_message("etudier les changements");
     m_algo2_4.set_pos(0,695);
-
-    m_top_box.add_child(m_main_box);
-    m_main_box.set_dim(800,720);
-    m_main_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
-    m_main_box.set_bg_color(BLANCBLEU);
-
 }
 
+//Ce constructeur va permettre l'affchage du menu
 Menu::Menu()
 {
+    //La déclaration de la tox box est la même que précédemment
     m_top_box.set_dim(1000,740);
     m_top_box.set_gravity_xy(grman::GravityX::Right, grman::GravityY::Up);
 
+    //On affiche la box du menu sur la top box avec les mêmes dimensions
     m_top_box.add_child(m_Menu);
     m_Menu.set_dim(1000,740);
     m_Menu.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
     m_Menu.set_bg_color(BLANC);
+    //On affiche sur le box du menu son image qui prend la totalité des dimensions
     m_Menu.add_child(m_Menu_image);
     m_Menu_image.set_pic_name("Menu.jpg");
 
+    //Ici, on déclare les boutons pour les différentes actions que peut faire l'utilisateur dans le menu
     m_Menu.add_child(m_boutonReseau1);
     m_boutonReseau1.set_dim(380, 110);
     m_boutonReseau1.set_pos(567, 200);
@@ -239,75 +235,54 @@ Menu::Menu()
     m_boutonMenuQuitter.set_dim(240, 58);
     m_boutonMenuQuitter.set_pos(707, 626);
 }
-void Graph::make_example()
-{
-    m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-
-    /// Les sommets doivent �tre d�finis avant les arcs
-    // Ajouter le sommet d'indice 0 de valeur 30 en x=200 et y=100 avec l'image clown1.jpg etc...
-    add_interfaced_vertex(0, 30.0, 200, 100, "Homme.jpg");
-    add_interfaced_vertex(1, 60.0, 400, 100, "Loup.jpg");
-    add_interfaced_vertex(2,  50.0, 200, 300, "Lapin.jpg");
-    add_interfaced_vertex(3,  0.0, 400, 300, "Decomposeurs.jpg");
-    add_interfaced_vertex(4,  100.0, 600, 300, "Sels_mineraux.jpg");
-    add_interfaced_vertex(5,  100.0, 100, 500, "Vegetation.jpg");
-    add_interfaced_vertex(6,  100.0, 300, 500, "Soleil_pluie.jpg");
-    add_interfaced_vertex(7,  100.0, 500, 500, "Campagnols.jpg");
-    add_interfaced_vertex(8,  100.0, 600, 500, "Buse.jpg");
-
-    /// Les arcs doivent �tre d�finis entre des sommets qui existent !
-    // AJouter l'arc d'indice 0, allant du sommet 1 au sommet 2 de poids 50 etc...
-    add_interfaced_edge(0, 1, 0, 300.0);
-    add_interfaced_edge(1, 2, 1, 2.0);
-    add_interfaced_edge(2, 2, 3, 1.0);
-    add_interfaced_edge(3, 3, 4, 0.0);
-    add_interfaced_edge(4, 4, 5, 8.0);
-    add_interfaced_edge(5, 6, 5, 8.0);
-    add_interfaced_edge(6, 7, 5, 50.0);
-    add_interfaced_edge(7, 7, 8, 20.0);
-    add_interfaced_edge(8, 1, 3, 0.0);
-    add_interfaced_edge(9, 7, 1, 0.0);
-    add_interfaced_edge(10, 2, 5, 80.0);
-}
-
+//On initialise la fonction qui va permettre de procéder aux différents choix de l'utilisateur
 int Menu::update(Graph g)
 {
-
+    //On affiche la top box du menu donc les boutons sur l'image du menu comme déclarer dans le constructeur
     m_top_box.update();
 
+    //Quand on clique sur le premier bouton
     if (m_boutonReseau1.clicked())
     {
+        //On affiche le choix de l'utilisateur
         std::cout<<"Reseau numero 1" << std::endl;
+        //On retourne la valeur 1 pour pouvoir afficher le premier réseau et son interface
         return 1;
     }
+
+    //De même pour le deuxième bouton
     if (m_boutonReseau2.clicked())
     {
         std::cout<<"Reseau numero 2" << std::endl;
         return 2;
     }
+
     if (m_boutonReseau3.clicked())
     {
         std::cout<<"Reseau numero 3" << std::endl;
         return 3;
     }
-  if (m_boutonMenuQuitter.clicked())
-  {
-      std::cout<<"Demande de quitter l'interface!" << std::endl;
-      return 4;
-  }
 
-  else
+    //Si on clique sur le dernier bouton, on quitte le menu
+    if (m_boutonMenuQuitter.clicked())
+    {
+        std::cout<<"Demande de quitter l'interface!" << std::endl;
+        return 4;
+    }
+
+    else
+    //Sinon on retourne rien et la boucle ne continue pas, on reste afficher sur le menu
     return 0;
 }
 
-/// La m�thode update � appeler dans la boucle de jeu pour les graphes avec interface
+//La méhode update à appeler dans la boucle de jeu pour les graphes avec interface
 int Graph::update(int what)
 {
+    if (!m_interface)
+    return what;
 
-   if (!m_interface)
-        return what;
-
+    //Si on clique sur les différents boutons de la barre d'outils de l'interface
     if (m_interface->m_boutonAjout.clicked())
     {
         std::cout<<"Demande d'ajout de sommet !" << std::endl;
@@ -326,12 +301,14 @@ int Graph::update(int what)
     if (m_interface->m_boutonSauvegarder.clicked())
     {
         std::cout<<"Demande de sauvegarde!" << std::endl;
+        //sssauvegarde1;
+        return 0;
     }
 
     if (m_interface->m_boutonQuitter.clicked())
     {
         std::cout<<"Demande de quitter le reseau!" << std::endl;
-        return 0;
+        exit(EXIT_FAILURE);
     }
 
     if (m_interface->m_boutonAlgoChoix.clicked())
@@ -354,24 +331,24 @@ int Graph::update(int what)
     return what;
 }
 
-/// Aide � l'ajout de sommets interfac�s
+//Aide à l'ajout de sommets interfacés
 void Graph::add_interfaced_vertex(int idx, double value, int x, int y, std::string pic_name)
 {
-    // m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
+    //m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     if ( m_vertices.find(idx)!=m_vertices.end() )
     {
         std::cerr << "Error adding vertex at idx=" << idx << " already used..." << std::endl;
         throw "Error adding vertex";
     }
-    // Cr�ation d'une interface de sommet
+    //Création d'une interface de sommet
     VertexInterface *vi = new VertexInterface(idx, x, y, pic_name);
-    // Ajout de la top box de l'interface de sommet
+    //Ajout de la top box de l'interface de sommet
     m_interface->m_main_box.add_child(vi->m_top_box);
-    // On peut ajouter directement des vertices dans la map avec la notation crochet :
+    //On peut ajouter directement des vertices dans la map avec la notation crochet
     m_vertices[idx] = Vertex(value, vi);
 }
 
-/// Aide � l'ajout d'arcs interfac�s
+//Aide à l'ajout d'arcs interfacés
 void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weight)
 {
     if ( m_edges.find(idx)!=m_edges.end() )
@@ -398,19 +375,18 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
 
 void Graph::recuperation1()
 {
-    //ouvrir le fichier
-
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
     cout<<m_interface<<endl;
     double value; //poids du sommet
-    int m_x,m_y;//coordonnées du sommet
-    string nom;//nom du sommet
-    double poids;// poids de l'arete
-    int ar,de; // numero de sommet d'arrive et de part
+    int m_x,m_y; //coordonnées du sommet
+    string nom; //nom du sommet
+    double poids; // poids de l'arete
+    int ar,de; //numéro de sommet d'arrivée et de départ
     std::ifstream fichierA("fiche1.txt",std::ios::in);
     int nbsommet;
     int nbaretes;
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA>>nbsommet;
@@ -431,26 +407,26 @@ void Graph::recuperation1()
         }
     }
 
-    else // si il y a une erreur
+    else //S'il y a une erreur
         cout << " error recuperation" << endl;
-        //fermer le fichier
+        //Fermer le fichier
         fichierA.close();
 }
 
 void Graph::recuperation2()
 {
-    //ouvrir le fichier
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    double value; //poid du sommet
-    int m_x,m_y;//coordonnées du sommet
-    string nom;//nom du sommet
-    double poids;// poid de l'arete
-    int ar,de; // numero de sommet d'arrive et de part
+    double value; //poids du sommet
+    int m_x,m_y; //coordonnées du sommet
+    string nom; //nom du sommet
+    double poids; //poids de l'arete
+    int ar,de; //numéro de sommet d'arrivée et de départ
     std::ifstream fichierA("fiche2.txt",std::ios::in);
     int nbsommet;
     int nbaretes;
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA>>nbsommet;
@@ -469,26 +445,26 @@ void Graph::recuperation2()
         }
     }
 
-    else // si il y a une erreur
-      cout << " error recuperation" << endl;
-      //fermer le fichier
-      fichierA.close();
+    else //S'il y a une erreur
+    cout << " error recuperation" << endl;
+    //Fermer le fichier
+    fichierA.close();
 }
 
 void Graph::recuperation3()
 {
-    //ouvrir le fichier
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
-    double value; //poid du sommet
-    int m_x,m_y;//coordonnées du sommet
-    string nom;//nom du sommet
-    double poids;// poid de l'arete
-    int ar,de; // numero de sommet d'arrive et de part
+    double value; //poids du sommet
+    int m_x,m_y; //coordonnées du sommet
+    string nom; //nom du sommet
+    double poids; //poids de l'arete
+    int ar,de; //numéro de sommet d'arrivée et de départ
     std::ifstream fichierA("fiche3.txt",std::ios::in);
     int nbsommet;
     int nbaretes;
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA>>nbsommet;
@@ -507,19 +483,19 @@ void Graph::recuperation3()
         }
     }
 
-    else // si il y a une erreur
-      cout << " error recuperation" << endl;
-      //fermer le fichier
-      fichierA.close();
+    else //S'il y a une erreur
+    cout << " error recuperation" << endl;
+    //Fermer le fichier
+    fichierA.close();
 }
 
 void Graph::sauvegarde1()
 {
-    //ouvrir le fichier
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     ofstream fichierA("fiche1.txt", ios::out | ios::ate);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA<<m_vertices.size()<<endl;
@@ -536,19 +512,19 @@ void Graph::sauvegarde1()
           fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
         }
     }
-    else // si il y a une erreur
-      cout << " error" << endl;
-      //fermer le fichier
-      fichierA.close();
+    else //S'il y a une erreur
+    cout << " error" << endl;
+    //Fermer le fichier
+    fichierA.close();
 }
 
 void Graph::sauvegarde2()
 {
-    //ouvrir le fichier
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     ofstream fichierA("fiche2.txt", ios::out | ios::ate);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA<<m_vertices.size()<<endl;
@@ -565,19 +541,19 @@ void Graph::sauvegarde2()
          fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
        }
    }
-   else // si il y a une erreur
-      cout << " error" << endl;
-      //fermer le fichier
-      fichierA.close();
+   else //S'il y a une erreur
+    cout << " error" << endl;
+    //Fermer le fichier
+    fichierA.close();
 }
 
 void Graph::sauvegarde3()
 {
-    //ouvrir le fichier
+    //Ouvrir le fichier
     m_interface = std::make_shared<GraphInterface>(50, 0, 750, 600);
 
     ofstream fichierA("fiche3.txt", ios::out | ios::ate);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     if(fichierA)
     {
         fichierA<<m_vertices.size()<<endl;
@@ -594,16 +570,16 @@ void Graph::sauvegarde3()
         fichierA<<i<<" "<<m_edges[i].m_from<<" "<<m_edges[i].m_to<<" "<<m_edges[i].m_weight<<endl;
        }
    }
-   else // si il y a une erreur
-      cout << " error" << endl;
-      //fermer le fichier
-      fichierA.close();
+   else //S'il y a une erreur
+    cout << " error" << endl;
+    //Fermer le fichier
+    fichierA.close();
 }
 
-void Graph::rajout1() // idx numero sommet , edx numero aretes
+void Graph::rajout1() //idx numéro sommet, edx numéro aretes
 {
     std::ifstream fichier("fiche1.txt",::ios::in);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     int nbsommet;
     int nbaretes;
 
@@ -640,10 +616,10 @@ void Graph::rajout1() // idx numero sommet , edx numero aretes
     }
 }
 
-void Graph::rajout2() // idx numero sommet , edx numero aretes
+void Graph::rajout2() //idx numéro sommet, edx numéro aretes
 {
     std::ifstream fichier("fiche2.txt",::ios::in);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     int nbsommet;
     int nbaretes;
 
@@ -680,10 +656,10 @@ void Graph::rajout2() // idx numero sommet , edx numero aretes
    }
 }
 
-void Graph::rajout3() // idx numero sommet , edx numero aretes
+void Graph::rajout3() //idx numéro sommet, edx numéro aretes
 {
     std::ifstream fichier("fiche3.txt",::ios::in);
-    // vérifier l'ouverture
+    //Vérifier l'ouverture
     int nbsommet;
     int nbaretes;
 
@@ -720,38 +696,38 @@ void Graph::rajout3() // idx numero sommet , edx numero aretes
       }
 }
 
-/// edx index of edge to remove
+//edx index of edge to remove
 void Graph::supprimer_edge(int edx)
 {
-    /// référence vers le Edge à enlever
+    //Référence vers le Edge à enlever
     Edge &remed=m_edges.at(edx);
 
-    /// test : on a bien des éléments interfacés
+    //Test : on a bien des éléments interfacés
     if (m_interface && remed.m_interface)
     {
         m_interface->m_main_box.remove_child( remed.m_interface->m_top_edge );
     }
 
-    /// Il reste encore à virer l'arc supprimé de la liste des entrants et sortants des 2 sommets to et from !
-    /// References sur les listes de edges des sommets from et to
+    //Il reste encore à virer l'arc supprimé de la liste des entrants et sortants des 2 sommets to et from !
+    //Références sur les listes de edges des sommets from et to
     std::vector<int> &vefrom = m_vertices[remed.m_from].m_out;
     std::vector<int> &veto = m_vertices[remed.m_to].m_in;
     vefrom.erase( std::remove( vefrom.begin(), vefrom.end(), edx ), vefrom.end() );
     veto.erase( std::remove( veto.begin(), veto.end(), edx ), veto.end() );
 
-    /// Le Edge ne nécessite pas non plus de delete car on n'a pas fait de new (sémantique par valeur)
-    /// Il suffit donc de supprimer l'entrée de la map pour supprimer à la fois l'Edge et le EdgeInterface
-    /// mais malheureusement ceci n'enlevait pas automatiquement l'interface top_edge en tant que child de main_box !
+    //Le Edge ne nécessite pas non plus de delete car on n'a pas fait de new (sémantique par valeur)
+    //Il suffit donc de supprimer l'entrée de la map pour supprimer à la fois l'Edge et le EdgeInterface
+    //mais malheureusement ceci n'enlevait pas automatiquement l'interface top_edge en tant que child de main_box !
     m_edges.erase( edx );
 }
 
 void Graph::supprimer_Sommet(int idx)
 {
-        /// référence vers le Edge à enlever
+    //Référence vers le Edge à enlever
     Vertex &remed=m_vertices.at(idx);
 
    vector <int> supp;
-   // pour trouver les aretes correspondant au sommet
+   //Pour trouver les aretes correspondantes au sommet
    for(int i=0; i<remed.m_in.size(); i++)
    {
        supp.push_back(remed.m_in[i]);
@@ -760,7 +736,7 @@ void Graph::supprimer_Sommet(int idx)
    {
        supp.push_back(remed.m_out[i]);
    }
-   // on supprimer les aretes trouvé
+   //On supprime les aretes trouvées
    for(int i=0;i<supp.size();i++)
     {
        supprimer_edge(supp.at(i));
@@ -777,6 +753,5 @@ void Graph::supprimer_Sommet(int idx)
         {
             m_vertices.erase(m_vertices[i].m_id);
         }
-
     }
 }
