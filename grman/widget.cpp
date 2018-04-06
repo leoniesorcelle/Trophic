@@ -107,8 +107,6 @@ void Widget::create_frame_context()
     int inside = m_border + m_padding;
     m_view = create_sub_bitmap(m_view_wb, inside, inside, w-2*inside, h-2*inside);
 
-    // Malheureusement ceci ne marche pas ... (à creuser)
-    //set_clip_rect(m_view, std::max(-x, 0), std::max(-y, 0), w-1, h-1);
 }
 
 void Widget::destroy_frame_context()
