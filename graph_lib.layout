@@ -4,41 +4,58 @@
 	<ActiveTarget name="Debug" />
 	<File name="grman\widget.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11290" topLine="315" />
+			<Cursor1 position="11522" topLine="327" />
 		</Cursor>
 	</File>
-	<File name="graph.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="12823" topLine="248" />
+			<Cursor1 position="391" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="algo.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="699" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="graph.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8605" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="241" />
-			<Collapse line="274" />
+			<Collapse line="84" />
+			<Collapse line="111" />
 		</Folding>
 	</File>
-	<File name="grman\grman.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="graph.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="5459" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="20" />
+			<Collapse line="57" />
+			<Collapse line="68" />
+			<Collapse line="81" />
+			<Collapse line="122" />
+		</Folding>
+	</File>
+	<File name="grman\grman.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3034" topLine="247" />
 		</Cursor>
 	</File>
-	<File name="grman\grman.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\grman.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6064" topLine="246" />
-		</Cursor>
-	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1029" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="graph.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="14332" topLine="289" />
+			<Cursor1 position="0" topLine="105" />
 		</Cursor>
 	</File>
 	<File name="grman\widget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="0" topLine="267" />
+		</Cursor>
+	</File>
+	<File name="algo.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="225" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

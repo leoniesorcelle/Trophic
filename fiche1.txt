@@ -1,15 +1,15 @@
 9
 11
-0 30 210 110 Homme.jpg
-1 60 -14548809 -14549109 Loup.jpg
-2 50 210 310 Lapin.jpg
-3 0 -19398548 -19398648 Decomposeurs.jpg
-4 100 -4849137 -4849437 Sels_mineraux.jpg
-5 100 -19398848 -19398448 Vegetation.jpg
-6 100 -4849437 -4849237 Soleil_pluie.jpg
-7 100 -19398448 -19398448 Campagnols.jpg
-8 100 -4849137 -4849237 Buse.jpg
-0 1 0 300
+0 450 171 65 Homme.jpg
+1 60 400 100 Loup.jpg
+2 50 200 300 Lapin.jpg
+3 0 400 300 Decomposeurs.jpg
+4 100 600 300 Sels_mineraux.jpg
+5 100 100 500 Vegetation.jpg
+6 100 300 500 Soleil_pluie.jpg
+7 1000 500 500 Campagnols.jpg
+8 437.5 667 465 Buse.jpg
+0 1 0 100
 1 2 1 2
 2 2 3 1
 3 3 4 0
