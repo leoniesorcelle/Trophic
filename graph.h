@@ -185,7 +185,9 @@ class Graph
         void add_interfaced_edge(int idx, int vert1, int vert2, double weight=0);
 
         //La méthode update à appeler dans la boucle de jeu pour les graphes avec interface
-        int update(int what);
+        int updateG1(int what);
+        int updateG2(int what);
+        int updateG3(int what);
         //Cette fonction permet de récupérer les informations des widgets à afficher dans un fichier pour les trois différents graphs
         void recuperation1();
         void recuperation2();
@@ -198,9 +200,32 @@ class Graph
         void rajout1();
         void rajout2();
         void rajout3();
-
+        // Suppression
         void supprimer_edge(int edx);
         void supprimer_Sommet(int idx);
+        //Cette fonction permet de regler les influences de nos graphes
+        void reglage1();
+        void reglage2();
+        void reglage3();
+        // sous-programme pour regler les influences
+        void reglage_2plus_5moins(int i, int k,int l,int m,int n, int o, int q, int j, double p, double v,double w, double z, double x, double y,double s); // 7 influences
+        void reglage_4plus(int i, int k,int l,int m, int j, double p, double v,double w, double z);
+        void reglage_2plus_2moins(int i, int k,int l,int m, int j, double p, double v,double w, double z); // 4 influences
+        void reglage_3moins_1plus(int i, int k,int l,int m, int j, double p, double v,double w,double x); //4 influences
+        void reglage_3plus_1moins(int i, int k,int l,int m, int j, double p, double v,double w,double x); // 4 influences
+        void reglage_3moins(int i, int k,int l, int j, double p, double v,double w); // 3 influences negative
+        void reglage_2moins_1plus(int i,int k,int l,int j, double p,double v,double w); // 3 influences
+        void reglage_2moins_1plus_p(int i,int k,int l,int j, double p,double v,double w); //3 influences inversé div et multi
+        void reglage_2plus_1moins(int i,int k,int l,int j, double p,double v,double w); // 3 influences
+        void reglage_2plus_1moins_p(int i,int k,int l,int j, double p,double v,double w);//3 influences inversé div et multi
+        void reglage_div(int i,int j, double v); // influence positive
+        void reglage_div_moins(int i,int j, double v); // influence negative
+        void reglage_div_p(int i,int k,int j, double p,double v); // 2 influences positive
+        void reglage_moins_plus(int i,int k,int j, double p,double v); // 2 influences negative
+        void reglage_multi(int i,int j, double v); //influences positive
+        void reglage_multi_moins(int i,int j, double v);// influences negative
+        void reglage_multi_p(int i,int k,int j,double p, double v);// 2 influences positive
+        void reglage_plus_moins(int i,int k,int j,double p, double v); // 2 influences negative
 };
 
 class Menu

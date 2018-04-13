@@ -419,7 +419,7 @@ class WidgetEdge : public Widget
         // Elements de décoration : pointes de flèches, rond etc...
         std::vector<ArrowItem> m_items;
 
-        int m_color = GRISSOMBRE;
+        int m_color = GRISCLAIR;
         int m_thickness = 2;
 
         // Position relative des éventuels Widgets enfants le long de l'arc, 0 origine, 0.5 milieu, 1.0 destination

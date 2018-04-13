@@ -15,13 +15,13 @@ VertexInterface::VertexInterface(int idx, int x, int y, std::string pic_name, in
 {
     //On affiche la totalité de l'écran dans une top box
     m_top_box.set_pos(x, y);
-    m_top_box.set_dim(130, 100);
+    m_top_box.set_dim(130, 110);
     m_top_box.set_moveable();
 
     //On affiche le slider de réglage de valeur
     m_top_box.add_child( m_slider_value );
-    m_slider_value.set_range(0.0 , 100.0);
-    m_slider_value.set_dim(20,80);
+    m_slider_value.set_range(0.0 , 1000.0);
+    m_slider_value.set_dim(20,90);
     m_slider_value.set_gravity_xy(grman::GravityX::Left, grman::GravityY::Up);
 
     //On affiche le label de visualisation de valeur : valeur du slider
@@ -83,13 +83,14 @@ EdgeInterface::EdgeInterface(Vertex& from, Vertex& to)
     m_top_edge.attach_to(to.m_interface->m_top_box);
     m_top_edge.reset_arrow_with_bullet();
 
+
     //Une boite pour englober les widgets de réglage associés
     m_top_edge.add_child(m_box_edge);
-    m_box_edge.set_dim(24,60);
+    m_box_edge.set_dim(20,20);
     m_box_edge.set_bg_color(BLANCBLEU);
 
     //Le slider de réglage de valeur
-    m_box_edge.add_child( m_slider_weight );
+   // m_box_edge.add_child( m_slider_weight );
     m_slider_weight.set_range(0.0 , 100.0);
     m_slider_weight.set_dim(16,40);
     m_slider_weight.set_gravity_y(grman::GravityY::Up);
@@ -277,7 +278,7 @@ int Menu::update(Graph g)
 }
 
 //La méhode update à appeler dans la boucle de jeu pour les graphes avec interface
-int Graph::update(int what)
+int Graph::updateG1(int what)
 {
     if (!m_interface)
     return what;
@@ -286,11 +287,14 @@ int Graph::update(int what)
     if (m_interface->m_boutonAjout.clicked())
     {
         std::cout<<"Demande d'ajout de sommet !" << std::endl;
+        rajout1();
     }
 
     if (m_interface->m_boutonSupp.clicked())
     {
         std::cout<<"Demande de suppression de sommet!" << std::endl;
+        /// recuperer l'identifiant du sommet (son numero)
+        supprimer_Sommet(5);
     }
 
     if (m_interface->m_boutonCharger.clicked())
@@ -301,7 +305,121 @@ int Graph::update(int what)
     if (m_interface->m_boutonSauvegarder.clicked())
     {
         std::cout<<"Demande de sauvegarde!" << std::endl;
-        //sssauvegarde1;
+        sauvegarde1();
+        return 0;
+    }
+
+    if (m_interface->m_boutonQuitter.clicked())
+    {
+        std::cout<<"Demande de quitter le reseau!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    if (m_interface->m_boutonAlgoChoix.clicked())
+    {
+        std::cout<<"Demande d'algorithme 2!" << std::endl;
+    }
+
+    for (auto &elt : m_vertices)
+        elt.second.pre_update();
+    for (auto &elt : m_edges)
+        elt.second.pre_update();
+
+    m_interface->m_top_box.update();
+
+    for (auto &elt : m_vertices)
+        elt.second.post_update();
+    for (auto &elt : m_edges)
+        elt.second.post_update();
+
+    return what;
+}
+
+int Graph::updateG2(int what)
+{
+    if (!m_interface)
+    return what;
+
+    //Si on clique sur les différents boutons de la barre d'outils de l'interface
+    if (m_interface->m_boutonAjout.clicked())
+    {
+        std::cout<<"Demande d'ajout de sommet !" << std::endl;
+        rajout2();
+    }
+
+    if (m_interface->m_boutonSupp.clicked())
+    {
+        std::cout<<"Demande de suppression de sommet!" << std::endl;
+        /// recuperer l'identifiant du sommet (son numero)
+        supprimer_Sommet(5);
+    }
+
+    if (m_interface->m_boutonCharger.clicked())
+    {
+        std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+    }
+
+    if (m_interface->m_boutonSauvegarder.clicked())
+    {
+        std::cout<<"Demande de sauvegarde!" << std::endl;
+        sauvegarde2();
+        return 0;
+    }
+
+    if (m_interface->m_boutonQuitter.clicked())
+    {
+        std::cout<<"Demande de quitter le reseau!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    if (m_interface->m_boutonAlgoChoix.clicked())
+    {
+        std::cout<<"Demande d'algorithme 2!" << std::endl;
+    }
+
+    for (auto &elt : m_vertices)
+        elt.second.pre_update();
+    for (auto &elt : m_edges)
+        elt.second.pre_update();
+
+    m_interface->m_top_box.update();
+
+    for (auto &elt : m_vertices)
+        elt.second.post_update();
+    for (auto &elt : m_edges)
+        elt.second.post_update();
+
+    return what;
+}
+
+int Graph::updateG3(int what)
+{
+    if (!m_interface)
+    return what;
+
+    //Si on clique sur les différents boutons de la barre d'outils de l'interface
+    if (m_interface->m_boutonAjout.clicked())
+    {
+        std::cout<<"Demande d'ajout de sommet !" << std::endl;
+        rajout3();
+    }
+
+    if (m_interface->m_boutonSupp.clicked())
+    {
+        std::cout<<"Demande de suppression de sommet!" << std::endl;
+        /// recuperer l'identifiant du sommet (son numero)
+        supprimer_Sommet(5);
+    }
+
+    if (m_interface->m_boutonCharger.clicked())
+    {
+        std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+    }
+
+    if (m_interface->m_boutonSauvegarder.clicked())
+    {
+        std::cout<<"Demande de sauvegarde!" << std::endl;
+        sauvegarde3();
         return 0;
     }
 
@@ -373,6 +491,7 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_vertices[id_vert2].m_in.push_back(idx);
 }
 
+/// Recuperer les informations de notre fichier
 void Graph::recuperation1()
 {
     //Ouvrir le fichier
@@ -489,6 +608,7 @@ void Graph::recuperation3()
     fichierA.close();
 }
 
+/// Effectuer une sauvegarde
 void Graph::sauvegarde1()
 {
     //Ouvrir le fichier
@@ -576,6 +696,7 @@ void Graph::sauvegarde3()
     fichierA.close();
 }
 
+/// Rajouter un sommet
 void Graph::rajout1() //idx numéro sommet, edx numéro aretes
 {
     std::ifstream fichier("fiche1.txt",::ios::in);
@@ -591,16 +712,18 @@ void Graph::rajout1() //idx numéro sommet, edx numéro aretes
         int edx=nbaretes-1;
 
         string raj;
-        cout<<"Vous pouvez rajouter soit insectes ou serpents"<<endl;
-        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cout<<endl<<endl<<"Vous pouvez rajouter soit insectes ou serpents"<<endl<<endl;
+        cout<<"Tapez le nom du sommet a rajouter"<<endl;
+    do{
         cin>>raj;
 
         if(raj=="insectes")
         {
           int iidx=idx+1;
           edx=edx+1;
-          add_interfaced_vertex(iidx,50.0,200,100,"Insectes.jpg");
+          add_interfaced_vertex(iidx,500.0,200,100,"Insectes.jpg");
           add_interfaced_edge(edx,idx,iidx,40.0);
+
         }
         else if(raj=="serpents")
         {
@@ -612,7 +735,9 @@ void Graph::rajout1() //idx numéro sommet, edx numéro aretes
         else
         {
           cout<<"nom incorrect"<<endl;
+          cout<<"Veuillez retaper un nom entre insectes et serpents (Attention aux s)"<<endl;
         }
+      }while((raj!="serpents")&&(raj!="insectes"));
     }
 }
 
@@ -631,10 +756,10 @@ void Graph::rajout2() //idx numéro sommet, edx numéro aretes
         int edx=nbaretes-1;
 
         string raj;
-        cout<<"Vous pouvez rajouter soit bebe ou sportifs"<<endl;
-        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cout<<endl<<endl<<"Vous pouvez rajouter soit bebe ou sportifs"<<endl;
+        cout<<"Tapez le nom du sommet a rajouter"<<endl;
+    do{
         cin>>raj;
-
         if(raj=="bebe")
         {
           int iidx=idx+1;
@@ -651,8 +776,10 @@ void Graph::rajout2() //idx numéro sommet, edx numéro aretes
         }
         else
         {
-          cout<<"nom incorrect"<<endl;
+          cout<<endl<<"nom incorrect"<<endl;
+          cout<<"Veuillez retaper un nom entre bebe et sportifs (Attention aux s)"<<endl;
         }
+     }while((raj!="bebe")&&(raj!="sportifs"));
    }
 }
 
@@ -671,8 +798,9 @@ void Graph::rajout3() //idx numéro sommet, edx numéro aretes
         int edx=nbaretes-1;
 
         string raj;
-        cout<<"Vous pouvez rajouter soit Homme ou pieuvres"<<endl;
-        cout<<"Tapez le nom du sommet à rajouter"<<endl;
+        cout<<endl<<endl<<"Vous pouvez rajouter soit Homme ou pieuvres"<<endl<<endl;
+        cout<<"Tapez le nom du sommet a rajouter"<<endl;
+    do{
         cin>>raj;
 
         if(raj=="Homme")
@@ -692,11 +820,13 @@ void Graph::rajout3() //idx numéro sommet, edx numéro aretes
         else
         {
           cout<<"nom incorrect"<<endl;
+          cout<<"Veuillez retaper un nom entre Homme et pieuvres (Attention aux s)"<<endl;
         }
-      }
+      }while((raj!="Homme")&&(raj!="pieuvres"));
+    }
 }
 
-//edx index of edge to remove
+///Supprimer
 void Graph::supprimer_edge(int edx)
 {
     //Référence vers le Edge à enlever
@@ -753,5 +883,479 @@ void Graph::supprimer_Sommet(int idx)
         {
             m_vertices.erase(m_vertices[i].m_id);
         }
+    }
+}
+
+
+/// Reglage
+void Graph::reglage1()
+{
+       // cout<<"Echelle 1kg = 10 1h=0,1"<<endl;
+        reglage_multi_moins(1,0,0.008);//sommet 0
+        reglage_div_p(2,7,1,2,70);//sommet 1
+        reglage_plus_moins(5,1,2,0.8,2);//sommet 2
+        reglage_2plus_1moins_p(1,2,4,3,12,9,1);//sommet 3
+        reglage_moins_plus(5,3,4,0.016,1);// sommet 4
+        reglage_2plus_2moins(6,4,7,2,5,0.8,0.016,0.5,0.8); // sommet 5
+        reglage_2moins_1plus(8,1,5,7,20.0,40.0,0.06); // reglage sommet 7
+        reglage_div(7,8,20.0); // reglage sommet 8
+}
+
+void Graph::reglage2()
+{
+       // cout<<"Echelle 1kg=10"<<endl;
+        reglage_div_p(1,5,0,125.0,5.0);// reglage sommet 0
+        reglage_2moins_1plus_p(0,2,4,1,125.0,1.0,0.1); // reglage sommet 1
+        reglage_div(3,2,2.0); // reglage sommet 2
+        reglage_multi_p(5,1,4,0.1,0.1); // reglage sommet 4
+        reglage_multi(4,5,0.1); // reglage sommet 5
+}
+
+void Graph::reglage3()
+{
+       // cout<<"Echelle 1kg=10"<<endl;
+        reglage_4plus(1,2,3,4,0,2.0,2.0,2.0,2.0); // sommet 0
+        reglage_moins_plus(0,8,1,2.0,4.0); // sommet 1
+        reglage_3plus_1moins(5,6,7,0,2,7.0,7.0,7.0,2.0); // sommet 2
+        reglage_2plus_1moins(8,7,0,3,0.7,1.0,2.0); // sommet 3
+        reglage_moins_plus(0,7,8,2.0,1.0); // sommet 4
+        reglage_moins_plus(2,8,5,7.0,1.0); // sommet 5
+        reglage_moins_plus(2,8,6,7.0,0.8);// sommet 6
+        reglage_3moins_1plus(3,4,2,8,7,1.0,1.0,7.0,0.5); //sommet 7
+        reglage_2plus_5moins(9,10,1,3,7,5,6,8,2.0,1.0,4.0,0.7,0.5,1.0,0.8); //sommet 8
+        reglage_multi_moins(8,9,2.0); //sommet 9
+        reglage_3moins(11,8,2,10,10.0,1.0,5.0);// reglage sommet 10
+        reglage_div(10,11,10.0);//reglage sommet 11
+}
+
+///SOUS PROGRAMMES DE REGLAGE///
+void Graph ::reglage_div(int i,int j,double p)
+{
+
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_poids);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_poids ) );
+    m_interface->m_top_box.update();
+    m_poids =  m_vertices[j].m_interface->m_slider_value.get_value();
+
+    double m_value =  m_vertices[i].m_interface->m_slider_value.get_value();
+
+    if(m_poids==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph ::reglage_div_moins(int i,int j,double p)
+{
+
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-m_poids;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+
+    double m_value =  m_vertices[i].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_moins_plus(int i, int k, int j, double p, double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-m_poids+m_weight;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_div_p(int i, int k, int j, double p, double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/w;
+    double m_total=(m_poids+m_weight);
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0||(m_value1+m_value2)<(p+w))
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph ::reglage_multi_moins(int i,int j,double p)
+{
+
+    double m_poids= m_vertices[i].m_interface->m_slider_value.get_value()*p;
+    double m_total=m_vertices[j].m_interface->m_slider_value.get_value()-m_poids;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+
+    double m_value =  m_vertices[i].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_multi(int i,int j,double p)
+{
+
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_poids);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_poids ) );
+    m_interface->m_top_box.update();
+    m_poids =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value =  m_vertices[i].m_interface->m_slider_value.get_value();
+
+    if(m_poids==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_multi_p(int i, int k, int j, double p, double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*w;
+    double m_total= m_poids+m_weight;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_plus_moins(int i, int k, int j, double p, double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+m_poids-m_weight;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2moins_1plus(int i, int k,int l, int j, double p, double v,double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()/w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-(m_poids+m_weight)+m_v;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2moins_1plus_p(int i, int k,int l, int j, double p, double v,double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-(m_poids+m_weight)+m_v;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2plus_1moins(int i, int k,int l, int j, double p, double v,double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+(m_poids+m_weight)-m_v;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2plus_1moins_p(int i, int k,int l, int j, double p, double v,double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()/w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+(m_poids+m_weight)-m_v;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2plus_2moins(int i, int k,int l,int m, int j, double p, double v,double w, double z)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_w=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_z=m_vertices[m].m_interface->m_slider_value.get_value()*z;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+(m_poids+m_weight)-(m_w+m_z);
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_4plus(int i, int k,int l,int m, int j, double p, double v,double w, double z)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_w=m_vertices[l].m_interface->m_slider_value.get_value()/w;
+    double m_z=m_vertices[m].m_interface->m_slider_value.get_value()/z;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+(m_poids+m_weight+m_w+m_z);
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_3moins(int i, int k,int l, int j, double p, double v,double w)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-(m_poids+m_weight+m_v);
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_3moins_1plus(int i, int k,int l,int m, int j, double p, double v,double w,double x)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())*p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())*v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_x=m_vertices[m].m_interface->m_slider_value.get_value()/x;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()-(m_poids+m_weight+m_v)+m_x;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_3plus_1moins(int i, int k,int l,int m, int j, double p, double v,double w,double x)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_v=m_vertices[l].m_interface->m_slider_value.get_value()/w;
+    double m_x=m_vertices[m].m_interface->m_slider_value.get_value()*x;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+m_poids+m_weight+m_v-m_x;
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
+    }
+}
+
+void Graph::reglage_2plus_5moins(int i, int k,int l,int m,int n, int o, int q, int j, double p, double v,double w, double z, double x, double y,double s)
+{
+    double m_poids=(m_vertices[i].m_interface->m_slider_value.get_value())/p;
+    double m_weight =(m_vertices[k].m_interface->m_slider_value.get_value())/v;
+    double m_w=m_vertices[l].m_interface->m_slider_value.get_value()*w;
+    double m_z=m_vertices[m].m_interface->m_slider_value.get_value()*z;
+    double m_x=m_vertices[n].m_interface->m_slider_value.get_value()*x;
+    double m_y=m_vertices[o].m_interface->m_slider_value.get_value()*y;
+    double m_s=m_vertices[q].m_interface->m_slider_value.get_value()*s;
+    double m_total= m_vertices[j].m_interface->m_slider_value.get_value()+(m_poids+m_weight)-(m_w+m_z+m_x+m_y+m_s);
+
+    m_vertices[j].m_interface->m_slider_value.set_value(m_total);
+    m_vertices[j].m_interface->m_label_value.set_message( std::to_string( (int)m_total ) );
+    m_interface->m_top_box.update();
+    m_total =  m_vertices[j].m_interface->m_slider_value.get_value();
+    double m_value1 = m_vertices[i].m_interface->m_slider_value.get_value();
+    double m_value2 = m_vertices[k].m_interface->m_slider_value.get_value();
+
+    if(m_total==0.0)
+    {
+        if(key[KEY_S])
+        {
+            supprimer_Sommet(j);
+        }
+
     }
 }

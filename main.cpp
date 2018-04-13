@@ -44,7 +44,8 @@ int main()
             fetched1=1;
         }
         //On appelle la fonction update de la class Graph qui permet l'affichage de la barre d'outils sur l'interface
-        what=g.update(what);
+        what=g.updateG1(what);
+        g.reglage1();
         grman::mettre_a_jour();
         break;
 
@@ -54,7 +55,8 @@ int main()
             g.recuperation2();
             fetched2=1;
         }
-        what=g.update(what);
+        what=g.updateG2(what);
+        g.reglage2();
         grman::mettre_a_jour();
         break;
 
@@ -64,7 +66,8 @@ int main()
             g.recuperation3();
             fetched3=1;
         }
-        what=g.update(what);
+        what=g.updateG3(what);
+        g.reglage3();
         grman::mettre_a_jour();
         break;
 

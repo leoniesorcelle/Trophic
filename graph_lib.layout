@@ -2,64 +2,67 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="grman\coords.cpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="graph.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="29077" topLine="0" />
 		</Cursor>
+		<Folding>
+			<Collapse line="14" />
+			<Collapse line="51" />
+			<Collapse line="62" />
+			<Collapse line="74" />
+			<Collapse line="104" />
+			<Collapse line="115" />
+			<Collapse line="127" />
+			<Collapse line="207" />
+			<Collapse line="241" />
+			<Collapse line="338" />
+			<Collapse line="395" />
+			<Collapse line="453" />
+			<Collapse line="470" />
+			<Collapse line="495" />
+			<Collapse line="535" />
+			<Collapse line="573" />
+		</Folding>
 	</File>
-	<File name="grman\grman.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\grman.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6064" topLine="249" />
+			<Cursor1 position="5640" topLine="65" />
 		</Cursor>
 	</File>
 	<File name="graph.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="10155" topLine="213" />
+			<Cursor1 position="3321" topLine="116" />
 		</Cursor>
 	</File>
-	<File name="grman\widget.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\grman_couleurs.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11290" topLine="0" />
+			<Cursor1 position="0" topLine="95" />
 		</Cursor>
 	</File>
-	<File name="grman\widget.cpp" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\grman.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2934" topLine="341" />
+			<Cursor1 position="3518" topLine="106" />
 		</Cursor>
 	</File>
-	<File name="grman\grman.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\widget.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="107" />
+			<Cursor1 position="5183" topLine="333" />
 		</Cursor>
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\widget.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="850" topLine="0" />
+			<Cursor1 position="13938" topLine="418" />
 		</Cursor>
 	</File>
-	<File name="graph.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="grman\coords.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="11777" topLine="163" />
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
-		<Folding>
-			<Collapse line="136" />
-			<Collapse line="214" />
-			<Collapse line="242" />
-			<Collapse line="274" />
-			<Collapse line="305" />
-			<Collapse line="358" />
-			<Collapse line="375" />
-			<Collapse line="399" />
-			<Collapse line="440" />
-			<Collapse line="478" />
-			<Collapse line="516" />
-			<Collapse line="545" />
-			<Collapse line="574" />
-			<Collapse line="603" />
-			<Collapse line="643" />
-			<Collapse line="683" />
-			<Collapse line="724" />
-			<Collapse line="748" />
-		</Folding>
+	</File>
+	<File name="main.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2219" topLine="0" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
