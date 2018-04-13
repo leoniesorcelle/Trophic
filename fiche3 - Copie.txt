@@ -1,17 +1,17 @@
 12
 18
-0 2.0 200 100 Orque.jpg
-1 60.0 400 100 Phoque_weddell.jpg
-2 50.0 200 300 Leopard_mer.jpg
-3 0.0 400 300 Manchot_empereur.jpg
-4 100.0 600 300 Elephant_mer.jpg
-5 100.0 100 500 Gorfou.jpg
-6 100.0 300 500 Manchot_adelie.jpg
-7 1000.0 500 500 Gros_poissons.jpg
-8 1000.0 600 500 Petits_poissons.jpg
-9 1000.0 600 500 Phytoplancton.jpg
-10 10000.0 600 500 Krill.jpg
-11 10.0 600 500 Baleine_bosses.jpg
+0 2.0 161 3 Orque.jpg
+1 60.0 502 3 Phoque_weddell.jpg
+2 50.0 3 152 Leopard_mer.jpg
+3 1.0 223 170 Manchot_empereur.jpg
+4 100.0 420 151 Elephant_mer.jpg
+5 100.0 3 574 Gorfou.jpg
+6 100.0 103 387 Manchot_adelie.jpg
+7 1000.0 291 327 Gros_poissons.jpg
+8 1000.0 626 445 Petits_poissons.jpg
+9 1000.0 667 201 Phytoplancton.jpg
+10 10000.0 305 606 Krill.jpg
+11 10.0 667 607 Baleine_bosses.jpg
 0 1 0 20.0
 1 2 0 20.0
 2 3 0 20.0

@@ -8,7 +8,7 @@
 5 100.0 100 500 Vegetation.jpg
 6 100.0 300 500 Soleil_pluie.jpg
 7 100.0 500 500 Campagnols.jpg
-8 100.0 600 500 Buse.jpg
+8 100.0 600 499 Buse.jpg
 0 1 0 0.008
 1 2 1 2.0
 2 2 3 9.0

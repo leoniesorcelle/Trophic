@@ -203,6 +203,9 @@ class Graph
         // Suppression
         void supprimer_edge(int edx);
         void supprimer_Sommet(int idx);
+        // Fonction pour vider le graphe
+        void Null();
+        int RecupNull(int fetched);
         //Cette fonction permet de regler les influences de nos graphes
         void reglage1();
         void reglage2();

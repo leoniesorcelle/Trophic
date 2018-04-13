@@ -242,7 +242,6 @@ int Menu::update(Graph g)
 {
     //On affiche la top box du menu donc les boutons sur l'image du menu comme déclarer dans le constructeur
     m_top_box.update();
-
     //Quand on clique sur le premier bouton
     if (m_boutonReseau1.clicked())
     {
@@ -291,22 +290,28 @@ int Graph::updateG1(int what)
     }
 
     if (m_interface->m_boutonSupp.clicked())
-    {
+    {   int idx;
         std::cout<<"Demande de suppression de sommet!" << std::endl;
-        /// recuperer l'identifiant du sommet (son numero)
-        supprimer_Sommet(5);
+        cout<<"Quel sommet voulez vous supprimer"<<endl;
+        cin>>idx;
+        supprimer_Sommet(idx);
+
     }
 
     if (m_interface->m_boutonCharger.clicked())
     {
         std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+        Null();
+        recuperation1();
+        return 0; // Retour au menu
     }
 
     if (m_interface->m_boutonSauvegarder.clicked())
     {
         std::cout<<"Demande de sauvegarde!" << std::endl;
         sauvegarde1();
-        return 0;
+        Null();
+        recuperation1();
     }
 
     if (m_interface->m_boutonQuitter.clicked())
@@ -348,22 +353,28 @@ int Graph::updateG2(int what)
     }
 
     if (m_interface->m_boutonSupp.clicked())
-    {
+    {   int idx;
         std::cout<<"Demande de suppression de sommet!" << std::endl;
-        /// recuperer l'identifiant du sommet (son numero)
-        supprimer_Sommet(5);
+        cout<<"Quel sommet voulez vous supprimer"<<endl;
+        cin>>idx;
+        supprimer_Sommet(idx);
     }
 
     if (m_interface->m_boutonCharger.clicked())
     {
         std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+        Null();
+        recuperation2();
+        return 0;
+
     }
 
     if (m_interface->m_boutonSauvegarder.clicked())
     {
         std::cout<<"Demande de sauvegarde!" << std::endl;
         sauvegarde2();
-        return 0;
+        Null();
+        recuperation2();
     }
 
     if (m_interface->m_boutonQuitter.clicked())
@@ -405,22 +416,27 @@ int Graph::updateG3(int what)
     }
 
     if (m_interface->m_boutonSupp.clicked())
-    {
+    {   int idx;
         std::cout<<"Demande de suppression de sommet!" << std::endl;
-        /// recuperer l'identifiant du sommet (son numero)
-        supprimer_Sommet(5);
+        cout<<"Quel sommet voulez vous supprimer"<<endl;
+        cin>>idx;
+        supprimer_Sommet(idx);
     }
 
     if (m_interface->m_boutonCharger.clicked())
     {
         std::cout<<"Demande de chargement d'un reseau!" << std::endl;
+        Null();
+        recuperation3();
+        return 0;
     }
 
     if (m_interface->m_boutonSauvegarder.clicked())
     {
         std::cout<<"Demande de sauvegarde!" << std::endl;
         sauvegarde3();
-        return 0;
+        Null();
+        recuperation3();
     }
 
     if (m_interface->m_boutonQuitter.clicked())
@@ -491,6 +507,22 @@ void Graph::add_interfaced_edge(int idx, int id_vert1, int id_vert2, double weig
     m_vertices[id_vert2].m_in.push_back(idx);
 }
 
+/// Fonction pour vider le graphe
+void Graph::Null()
+{
+    m_vertices.clear();
+    m_edges.clear();
+    m_interface.reset();
+    m_ordre=0;
+    m_arete=0;
+
+}
+
+int Graph::RecupNull(int fetched)
+{
+    return 0;
+}
+
 /// Recuperer les informations de notre fichier
 void Graph::recuperation1()
 {
@@ -502,9 +534,10 @@ void Graph::recuperation1()
     string nom; //nom du sommet
     double poids; // poids de l'arete
     int ar,de; //numéro de sommet d'arrivée et de départ
-    std::ifstream fichierA("fiche1.txt",std::ios::in);
+    std::ifstream fichierA("fiche1.txt",std::ios::in); //lecture de fichier
     int nbsommet;
     int nbaretes;
+    Vertex v;
     //Vérifier l'ouverture
     if(fichierA)
     {
@@ -516,6 +549,7 @@ void Graph::recuperation1()
         {
           fichierA>>i>>value>>m_x>>m_y>>nom;
           add_interfaced_vertex(i,value,m_x,m_y,nom);
+          v.m_id=i;
 
         }
         for(int i=0;i<nbaretes;i++)
@@ -721,7 +755,7 @@ void Graph::rajout1() //idx numéro sommet, edx numéro aretes
         {
           int iidx=idx+1;
           edx=edx+1;
-          add_interfaced_vertex(iidx,500.0,200,100,"Insectes.jpg");
+          add_interfaced_vertex(iidx,500.0,0,100,"Insectes.jpg");
           add_interfaced_edge(edx,idx,iidx,40.0);
 
         }
@@ -729,7 +763,7 @@ void Graph::rajout1() //idx numéro sommet, edx numéro aretes
         {
           int iidx=idx+1;
           edx=edx+1;
-          add_interfaced_vertex(iidx,20.0,200,100,"Serpents.jpg");
+          add_interfaced_vertex(iidx,20.0,100,0,"Serpents.jpg");
           add_interfaced_edge(edx,idx,iidx,40.0);
         }
         else
@@ -853,7 +887,7 @@ void Graph::supprimer_edge(int edx)
 
 void Graph::supprimer_Sommet(int idx)
 {
-    //Référence vers le Edge à enlever
+    //Référence vers le sommet à enlever
     Vertex &remed=m_vertices.at(idx);
 
    vector <int> supp;
@@ -877,12 +911,13 @@ void Graph::supprimer_Sommet(int idx)
         m_interface->m_main_box.remove_child( remed.m_interface->m_top_box );
     }
 
-    for(int i=0; i<m_vertices.size();i++)
+    for(unsigned int i=0; i<m_vertices.size();i++)
     {
-        if(m_vertices[i].m_id==idx)
+        if(i==idx)
         {
             m_vertices.erase(m_vertices[i].m_id);
         }
+
     }
 }
 
@@ -890,7 +925,7 @@ void Graph::supprimer_Sommet(int idx)
 /// Reglage
 void Graph::reglage1()
 {
-       // cout<<"Echelle 1kg = 10 1h=0,1"<<endl;
+       ///"Echelle 1kg = 10 1h=0,1"
         reglage_multi_moins(1,0,0.008);//sommet 0
         reglage_div_p(2,7,1,2,70);//sommet 1
         reglage_plus_moins(5,1,2,0.8,2);//sommet 2
@@ -903,7 +938,7 @@ void Graph::reglage1()
 
 void Graph::reglage2()
 {
-       // cout<<"Echelle 1kg=10"<<endl;
+       /// "Echelle 1kg=10"
         reglage_div_p(1,5,0,125.0,5.0);// reglage sommet 0
         reglage_2moins_1plus_p(0,2,4,1,125.0,1.0,0.1); // reglage sommet 1
         reglage_div(3,2,2.0); // reglage sommet 2
@@ -913,7 +948,7 @@ void Graph::reglage2()
 
 void Graph::reglage3()
 {
-       // cout<<"Echelle 1kg=10"<<endl;
+       /// "Echelle 1kg=10"
         reglage_4plus(1,2,3,4,0,2.0,2.0,2.0,2.0); // sommet 0
         reglage_moins_plus(0,8,1,2.0,4.0); // sommet 1
         reglage_3plus_1moins(5,6,7,0,2,7.0,7.0,7.0,2.0); // sommet 2
