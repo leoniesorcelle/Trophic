@@ -59,8 +59,6 @@ class Widget
         GravityX m_gravity_x = GravityX::Center;
         GravityY m_gravity_y = GravityY::Center;
 
-        int m_bg_color = -1;
-
         int m_border_color = GRISSOMBRE;
         int m_border_color_over = VIOLETSOMBRE;
         int m_border_color_focus = ORANGESOMBRE;
@@ -72,6 +70,8 @@ class Widget
     /// Méthodes utilisables dans les classes dérivées
     /// et les classes qui ont un Widget ou dérivé en attribut
     public :
+
+        int m_bg_color = -1;
 
         /// Construction/Destruction
         Widget(double x, double y, double w, double h) :
@@ -419,7 +419,7 @@ class WidgetEdge : public Widget
         // Elements de décoration : pointes de flèches, rond etc...
         std::vector<ArrowItem> m_items;
 
-        int m_color = GRISCLAIR;
+        int m_color = GRISSOMBRE;
         int m_thickness = 2;
 
         // Position relative des éventuels Widgets enfants le long de l'arc, 0 origine, 0.5 milieu, 1.0 destination
